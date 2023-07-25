@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from 'react';
 import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from 'react-icons/ai';
 
@@ -38,38 +37,24 @@ const Carousel = () => {
   };
 
   return (
-    <div className="relative w-full mt-10 ">
-      <div
-        className="flex items-center justify-center w-full h-full py-2 mx-auto"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <AiOutlineDoubleLeft
-          className="w-8 h-8 text-2xl text-blue-500 cursor-pointer"
-          onClick={slideLeft}
-        />
-        <div className="relative w-full h-96 rounded-lg overflow-hidden">
+   <div className='bg-white w-[10px] h-[450px]' >
+     
+     
+        <div className="relative w-[1400px] h-[450px] overflow-hidden">
           {images.map((image, index) => (
             <div
               key={index}
-              className={`absolute top-0 left-0 w-full h-full transform ${
+              className={`w-[1600px] h-[450px] absolute top-0 left-0 transform ${
                 index === current ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'
               } transition-opacity transition-transform`}
             >
-              <img
-                className="object-cover w-full h-full"
-                src={image}
-                alt={`Slide ${index}`}
-              />
+              <img className="object-cover w-[1400px] h-[450px]" src={image} alt={`Slide ${index}`} />
             </div>
           ))}
         </div>
-        <AiOutlineDoubleRight
-          className="w-8 h-8 text-2xl text-blue-500 cursor-pointer"
-          onClick={slideRight}
-        />
-      </div>
-      <div className="flex items-center justify-center mt-2">
+       
+   
+      <div className="flex items-center justify-center absolute bottom-4 left-0 w-full">
         {images.map((_, index) => (
           <div
             key={index}
@@ -81,6 +66,7 @@ const Carousel = () => {
         ))}
       </div>
     </div>
+ 
   );
 };
 

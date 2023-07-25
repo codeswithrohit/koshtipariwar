@@ -3,8 +3,8 @@ import React from 'react'
 
 const contactus = () => {
   return (
-    <div>
-        <section class="bg-white dark:bg-gray-900">
+    <div className='bg-white m-auto min-h-screen'>
+        <section class=" dark:bg-gray-900">
     <div class="container px-6 py-12 mx-auto">
         <div class="text-center ">
             <p class="font-medium text-blue-500 dark:text-blue-400">Contact us</p>
