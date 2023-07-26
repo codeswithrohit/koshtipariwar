@@ -1,8 +1,50 @@
+import React, { useState, useEffect } from 'react';
+import { firebase } from '../Firebase/config';
+import { getAuth, signOut } from 'firebase/auth';
 import Link from 'next/link';
-import React,{useState} from 'react'
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    // Add a listener to check for changes in the user's authentication state
+    const auth = getAuth();
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      setIsLoading(true); // Start the loading state
+      const auth = getAuth();
+      await signOut(auth);
+      setIsLoading(false); // End the loading state
+      toast.success('You have successfully logged out!', {
+        position: 'top-center',
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    } catch (error) {
+      setIsLoading(false); // End the loading state in case of error
+      console.error('Error logging out:', error);
+    }
+  };
+
+  const handleLinkClick = () => {
+    // Close the menu when a link is clicked
+    setIsMenuOpen(false);
+  };
+
   return (
 <div className='bg-white sticky top-2 bg-white z-50 rounded-lg '>
 <div className="  px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 ">
@@ -71,28 +113,58 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <ul className="flex items-center hidden space-x-8 lg:flex">
-          <li>
-            <Link
-              href="/login"
-              aria-label="Sign in"
-              title="Sign in"
-              className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-            >
-              Sign in
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/signup"
-              className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-              aria-label="Sign up"
-              title="Sign up"
-            >
-              Sign up
-            </Link>
-          </li>
-        </ul>
+        {user ? (
+             <ul className="flex items-center hidden space-x-8 lg:flex">
+             <li>
+               <Link
+                 href="/profile"
+                 aria-label="Profile"
+                 title="Profile"
+                 className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+               >
+                 Profile
+               </Link>
+             </li>
+             <li>
+             {isLoading ? (
+                        <div className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-deep-purple-accent-400">
+                          Loading...
+                        </div>
+                      ) : (
+                        <button
+                          onClick={handleLogout}
+                          className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                        >
+                          Logout
+                        </button>
+                      )}
+             </li>
+           </ul>
+          ) : (
+            <ul className="flex items-center hidden space-x-8 lg:flex">
+              
+              <li>
+                
+                <Link href="/login" className="flex items-center text-black font-medium">
+                    Log In
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                </Link>
+            </li>
+             
+              <li>
+                <Link
+                  href="/signup"
+                  className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                  aria-label="Sign up"
+                  title="Sign up"
+                >
+                  Sign up
+                </Link>
+              </li>
+            </ul>
+          )}
         <div className="lg:hidden">
           <button
             aria-label="Open Menu"
@@ -122,9 +194,10 @@ const Navbar = () => {
                   <div>
                     <Link
                       href="/"
-                      aria-label="Company"
-                      title="Company"
+                      aria-label="Koshtipariwar"
+                      title="Koshtipariwar"
                       className="inline-flex items-center"
+                      onClick={handleLinkClick}
                     >
                                  <img class=" w-18 h-12 mx-auto rounded-lg" 
            src="http://koshtipariwar.com/wp-content/uploads/koshti_logo3.jpg" alt="koshtipariwar" />
@@ -153,6 +226,7 @@ const Navbar = () => {
                         href="/aboutus"
                         aria-label="aboutus"
                         title="aboutus"
+                        onClick={handleLinkClick}
                         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
                         About US
@@ -172,6 +246,7 @@ const Navbar = () => {
                       <Link
                         href="/matrimonial"
                         aria-label="Matrimonial"
+                        onClick={handleLinkClick}
                         title="matrimonial"
                         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
@@ -182,6 +257,7 @@ const Navbar = () => {
                       <Link
                         href="/jobs"
                         aria-label="jobs"
+                        onClick={handleLinkClick}
                         title="jobs"
                         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
@@ -192,32 +268,71 @@ const Navbar = () => {
                       <Link
                         href="/contactus"
                         aria-label="Contact us"
+                        onClick={handleLinkClick}
                         title="Contact us"
                         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
                      Contact Us
                       </Link>
                     </li>
-                    <li>
+                    {user ? (
+           
+              <>
+              <li>
                       <Link
-                        href="/login"
-                        aria-label="Sign in"
-                        title="Sign in"
+                        href="/profile"
+                        aria-label="profile"
+                        onClick={handleLinkClick}
+                        title="profile"
                         className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
-                        Sign in
+                    Profile
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        href="/"
-                        className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                        aria-label="Sign up"
-                        title="Sign up"
-                      >
-                        Sign up
-                      </Link>
+                    {isLoading ? (
+                        <div className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-deep-purple-accent-400">
+                          Loading...
+                        </div>
+                      ) : (
+                        <button
+                          onClick={handleLogout}
+                          
+                          className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                        >
+                          Logout
+                        </button>
+                      )}
                     </li>
+
+                          </>
+          
+          ) : (
+         
+              <>
+              <li>
+                
+                <Link   onClick={handleLinkClick} href="/login" className="flex items-center text-black font-medium">
+                    Log In
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                </Link>
+            </li>
+                            
+                         <li>
+                              <Link
+                                href="/signup"
+                                onClick={handleLinkClick}
+                                className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                                aria-label="Sign up"
+                                title="Sign up"
+                              >
+                                Sign up
+                              </Link>
+                            </li></>
+       
+          )}
                   </ul>
                 </nav>
               </div>

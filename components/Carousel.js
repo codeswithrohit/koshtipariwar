@@ -1,73 +1,86 @@
-import React, { useState, useEffect } from 'react';
-import { AiOutlineDoubleLeft, AiOutlineDoubleRight } from 'react-icons/ai';
+import React, { useState, useEffect, useRef } from "react";
+import { AiOutlineVerticalRight, AiOutlineVerticalLeft } from "react-icons/ai";
 
-const images = [
+const featuredProducts = [
   'https://wallpaperaccess.com/full/43867.jpg',
   'https://c4.wallpaperflare.com/wallpaper/311/453/240/selective-focus-micro-photography-of-white-petaled-flower-wallpaper-preview.jpg',
 ];
 
-const Carousel = () => {
-  const [current, setCurrent] = useState(0);
-  const [autoPlay, setAutoPlay] = useState(true);
-  let timeOut = null;
+let count = 0;
+let slideInterval;
+
+export default function Slider() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const slideRef = useRef();
+
+  const removeAnimation = () => {
+    slideRef.current.classList.remove("fade-anim");
+  };
 
   useEffect(() => {
-    timeOut = autoPlay && setTimeout(slideRight, 5000);
+    slideRef.current.addEventListener("animationend", removeAnimation);
+    slideRef.current.addEventListener("mouseenter", pauseSlider);
+    slideRef.current.addEventListener("mouseleave", startSlider);
 
+    startSlider();
     return () => {
-      clearTimeout(timeOut);
+      pauseSlider();
     };
-  }, [current, autoPlay]);
+    // eslint-disable-next-line
+  }, []);
 
-  const slideRight = () => {
-    setCurrent((current) => (current + 1) % images.length);
+  const startSlider = () => {
+    slideInterval = setInterval(() => {
+      handleOnNextClick();
+    }, 5000);
   };
 
-  const slideLeft = () => {
-    setCurrent((current) => (current - 1 + images.length) % images.length);
+  const pauseSlider = () => {
+    clearInterval(slideInterval);
   };
 
-  const handleMouseEnter = () => {
-    setAutoPlay(false);
-    clearTimeout(timeOut);
+  const handleOnNextClick = () => {
+    count = (count + 1) % featuredProducts.length;
+    setCurrentIndex(count);
+    slideRef.current.classList.add("fade-anim");
   };
 
-  const handleMouseLeave = () => {
-    setAutoPlay(true);
+  const handleOnPrevClick = () => {
+    const productsLength = featuredProducts.length;
+    count = (currentIndex + productsLength - 1) % productsLength;
+    setCurrentIndex(count);
+    slideRef.current.classList.add("fade-anim");
   };
 
   return (
-   <div className='bg-white w-[10px] h-[450px]' >
-     
-     
-        <div className="relative w-[1400px] h-[450px] overflow-hidden">
-          {images.map((image, index) => (
-            <div
-              key={index}
-              className={`w-[1600px] h-[450px] absolute top-0 left-0 transform ${
-                index === current ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'
-              } transition-opacity transition-transform`}
-            >
-              <img className="object-cover w-[1400px] h-[450px]" src={image} alt={`Slide ${index}`} />
-            </div>
-          ))}
-        </div>
-       
-   
-      <div className="flex items-center justify-center absolute bottom-4 left-0 w-full">
-        {images.map((_, index) => (
-          <div
-            key={index}
-            className={`w-2 h-2 mx-1 rounded-full cursor-pointer ${
-              index === current ? 'bg-blue-500' : 'bg-gray-300'
-            }`}
-            onClick={() => setCurrent(index)}
-          />
-        ))}
+    <div ref={slideRef} className="w-full select-none relative">
+      <div className="aspect-w-16 aspect-h-9">
+        <img
+          src={featuredProducts[currentIndex]}
+          alt=""
+          style={{ width: "1500px", height: "420px" }}
+        />
+
+        {/* Overlay Content */}
+        
+        {/* End Overlay Content */}
+      </div>
+
+      <div className="absolute w-full top-1/2 transform -translate-y-1/2 px-3 flex justify-between items-center">
+        <button
+          className="bg-black text-white p-1 rounded-full bg-opacity-50 cursor-pointer hover:bg-opacity-100 transition"
+          onClick={handleOnPrevClick}
+        >
+          <AiOutlineVerticalRight size={30} />
+        </button>
+        <button
+          className="bg-black text-white p-1 rounded-full bg-opacity-50 cursor-pointer hover:bg-opacity-100 transition"
+          onClick={handleOnNextClick}
+        >
+          <AiOutlineVerticalLeft size={30} />
+        </button>
       </div>
     </div>
- 
   );
-};
-
-export default Carousel;
+}
