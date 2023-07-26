@@ -1,9 +1,7 @@
 import Carousel from '@/components/Carousel';
-import Link from 'next/link';
-import Head from 'next/head'
 import React, { useState,useEffect } from 'react';
 
-
+import Head from 'next/head'
 
 
 const Index = () => {
@@ -375,3 +373,4 @@ const Index = () => {
 };
 
 export default Index;
+
