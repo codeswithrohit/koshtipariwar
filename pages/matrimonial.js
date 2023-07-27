@@ -12,7 +12,7 @@ const matrimonial = () => {
         </p>
       
       </div>
-      <div className="grid gap-10 mx-auto lg:grid-cols-2 lg:max-w-screen-lg">
+      <div className="grid gap-10 mx-auto lg:grid-cols-2 lg:max-w-screen-lg px-5">
         <div className="grid sm:grid-cols-3">
           <div className="relative w-full h-48 max-h-full rounded shadow sm:h-auto">
             <img

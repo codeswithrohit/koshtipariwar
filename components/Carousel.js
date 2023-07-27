@@ -1,87 +1,62 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState, useEffect, useRef } from "react";
-import { AiOutlineVerticalRight, AiOutlineVerticalLeft } from "react-icons/ai";
+import React, { useState, useRef } from "react";
+import { AiOutlineArrowRight, AiOutlineArrowLeft } from "react-icons/ai";
 
-const featuredProducts = [
-  'https://images.pexels.com/photos/6685151/pexels-photo-6685151.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-  'https://images.pexels.com/photos/6500578/pexels-photo-6500578.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-];
-
-let count = 0;
-let slideInterval;
-
-export default function Slider() {
+const Carousel = ({ imageUrls }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-
   const slideRef = useRef();
+  let count = 0;
 
   const removeAnimation = () => {
     slideRef.current.classList.remove("fade-anim");
   };
 
-  useEffect(() => {
-    slideRef.current.addEventListener("animationend", removeAnimation);
-    slideRef.current.addEventListener("mouseenter", pauseSlider);
-    slideRef.current.addEventListener("mouseleave", startSlider);
-
-    startSlider();
-    return () => {
-      pauseSlider();
-    };
-    // eslint-disable-next-line
-  }, []);
-
-  const startSlider = () => {
-    slideInterval = setInterval(() => {
-      handleOnNextClick();
-    }, 5000);
-  };
-
-  const pauseSlider = () => {
-    clearInterval(slideInterval);
-  };
-
   const handleOnNextClick = () => {
-    count = (count + 1) % featuredProducts.length;
+    count = (count + 1) % imageUrls.length;
     setCurrentIndex(count);
     slideRef.current.classList.add("fade-anim");
   };
 
   const handleOnPrevClick = () => {
-    const productsLength = featuredProducts.length;
-    count = (currentIndex + productsLength - 1) % productsLength;
+    const imagesLength = imageUrls.length;
+    count = (count + imagesLength - 1) % imagesLength;
     setCurrentIndex(count);
     slideRef.current.classList.add("fade-anim");
   };
+
+  if (imageUrls.length === 0) {
+    // If imageUrls array is empty, show a placeholder or loading spinner
+    return <div>Loading...</div>; // You can replace this with an appropriate loading component
+  }
 
   return (
     <div ref={slideRef} className="w-full select-none relative bg-white">
       <div className="aspect-w-16 aspect-h-9">
         <img
-          src={featuredProducts[currentIndex]}
+          src={imageUrls[currentIndex]}
           alt=""
-          style={{ width: "1400px", height: "600px" }}
+          style={{ width: "100%", height: "auto", maxWidth: "1500px", maxHeight: "600px" }}
         />
-
         {/* Overlay Content */}
-        
         {/* End Overlay Content */}
       </div>
-
       <div className="absolute w-full top-1/2 transform -translate-y-1/2 px-3 flex justify-between items-center">
         <button
           className="bg-black text-white p-1 rounded-full bg-opacity-50 cursor-pointer hover:bg-opacity-100 transition"
           onClick={handleOnPrevClick}
         >
-          <AiOutlineVerticalRight size={30} />
+          <AiOutlineArrowLeft size={30} />
         </button>
         <button
           className="bg-black text-white p-1 rounded-full bg-opacity-50 cursor-pointer hover:bg-opacity-100 transition"
           onClick={handleOnNextClick}
         >
-          <AiOutlineVerticalLeft size={30} />
+          <AiOutlineArrowRight size={30} />
         </button>
       </div>
     </div>
   );
-}
+};
+
+export default Carousel;
+

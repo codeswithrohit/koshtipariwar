@@ -1,37 +1,54 @@
-/* eslint-disable @next/next/no-img-element */
-import Carousel from '@/components/Carousel';
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import Head from "next/head";
 import Link from 'next/link'
-import Head from 'next/head'
+import { firebase } from "../Firebase/config"; // Import the Firebase configuration
 
+import Carousel from "../components/Carousel";
 
 const Index = () => {
+  const [imageUrls, setImageUrls] = useState([]);
 
+  useEffect(() => {
+    // Fetch the image data from Firebase and update the state
+    const fetchImageData = async () => {
+      try {
+        const db = firebase.firestore();
+        const snapshot = await db.collection("sliderData").get();
+        const imageUrls = snapshot.docs.map((doc) => doc.data().imageUrl);
+        setImageUrls(imageUrls);
+      } catch (error) {
+        console.error("Error fetching image data:", error);
+      }
+    };
 
+    fetchImageData();
+  }, []);
+
+  console.log(imageUrls)
 
   return (
-    <div className=" min-h-screen">
+    <div className="min-h-screen">
       <Head>
         <title>Koshti Pariwar</title>
         <meta name="Koshti Pariwar" content="Dizi Global Solution" />
         <link rel="icon" href="/icon.png" />
       </Head>
-   	<Carousel/>
+      <Carousel imageUrls={imageUrls} />
      <section class="bg-white ">
     <div class="container  mx-auto">
         <div class="text-center">
-            <h1 class="text-2xl font-semibold text-pink-900 capitalize lg:text-3xl dark:text-white py-10">Recent Events</h1>
+            <h1 class="text-2xl font-semibold text-pink-900 capitalize lg:text-3xl dark:text-white py-5">Recent Events</h1>
 
          
         </div>
 
-        <div class="grid grid-cols-1 gap-8 mt-8 lg:grid-cols-3">
+        <div class="grid grid-cols-1 gap-8 mt-2 lg:grid-cols-3 px-5">
         <div>
                 <img class="relative z-10 object-cover w-full rounded-md h-96" src="https://www.ieplads.com/mailers/2016/jeevansathi/js-lp-21sept/images/js1.jpg" alt=""/>
 
                 <div class="relative z-20 max-w-lg p-6 mx-auto -mt-20 bg-white rounded-md shadow dark:bg-gray-900">
                     <Link href="#" class="font-semibold text-gray-800 hover:underline dark:text-white md:text-xl">
-                    Tapas & Dibyadarsini
+                    Tapas and Dibyadarsini
                     </Link>
 
                     <p class="mt-3 text-sm text-gray-500 dark:text-gray-300 md:text-sm">
@@ -47,7 +64,7 @@ const Index = () => {
 
                 <div class="relative z-20 max-w-lg p-6 mx-auto -mt-20 bg-white rounded-md shadow dark:bg-gray-900">
                     <Link href="#" class="font-semibold text-gray-800 hover:underline dark:text-white md:text-xl">
-                    Sai & Paladi
+                    Sai and Paladi
                     </Link>
 
                     <p class="mt-3 text-sm text-gray-500 dark:text-gray-300 md:text-sm">
@@ -63,11 +80,11 @@ const Index = () => {
 
                 <div class="relative z-20 max-w-lg p-6 mx-auto -mt-20 bg-white rounded-md shadow dark:bg-gray-900">
                     <Link href="#" class="font-semibold text-gray-800 hover:underline dark:text-white md:text-xl">
-                    Aditya & Archana
+                    Aditya and Archana
                     </Link>
 
                     <p class="mt-3 text-sm text-gray-500 dark:text-gray-300 md:text-sm">
-                    Aditya and Me met via Shaadi.com in 2022. We both liked good conversations . I was impressed with Aditya's clear communication, We met after initial texts & phone calls. 
+                    Aditya and Me met via Shaadi.com in 2022. We both liked good conversations . I was impressed with Adityas clear communication, We met after initial texts and phone calls. 
                     </p>
 
                     <p class="mt-3 text-sm text-pink-500">20 October 2019</p>
