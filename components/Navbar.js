@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from 'react';
 import { firebase } from '../Firebase/config';
 import { getAuth, signOut } from 'firebase/auth';
