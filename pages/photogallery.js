@@ -7,42 +7,68 @@ const photogallery = () => {
        
 <section className="bg-white dark:bg-gray-900">
     <div className="container px-6 py-10 mx-auto">
-        <h1 className="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white">Our
-           Collection</h1>
+        <h1 className="text-2xl font-semibold text-center text-pink-900 capitalize lg:text-3xl dark:text-white">Program
+          Photo</h1>
 
         <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 lg:grid-cols-3">
-            <div className="flex items-end overflow-hidden bg-cover rounded-lg h-96" style={{
-    backgroundImage: "url('https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80')",
-  }}
->
-                <div className="w-full px-8 py-4 overflow-hidden rounded-b-lg backdrop-blur-sm bg-white/60 dark:bg-gray-800/60">
-                    <h2 className="mt-4 text-xl font-semibold text-gray-800 capitalize dark:text-white">Best website
-                        collections</h2>
-                    <p className="mt-2 text-lg tracking-wider text-blue-500 uppercase dark:text-blue-400 ">Website</p>
+          
+        <Link href="/gallerydetails">
+              
+                <div
+                  className="flex items-end overflow-hidden bg-cover rounded-lg h-96 cursor-pointer"
+                  style={{
+                    backgroundImage:
+                      "url('https://www.k4fashion.com/wp-content/uploads/2022/09/The-Picture-Perfect-Family-Portrait-wedding-photos-750x460.jpg')",
+                  }}
+                >
+                  <div className="w-full px-8 py-4 overflow-hidden rounded-b-lg backdrop-blur-sm bg-white/60 dark:bg-gray-800/60">
+                    <h2 className="mt-4 text-xl font-semibold text-pink-900 capitalize dark:text-white">
+                      Mumbai
+                    </h2>
+                   
+                  </div>
                 </div>
-            </div>
+             
+            </Link>
 
-            <div className="flex items-end overflow-hidden bg-cover rounded-lg h-96" style={{
-    backgroundImage: "url('https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80')",
-  }}
->
+            <Link href="/gallerydetails">
+              
+              <div
+                className="flex items-end overflow-hidden bg-cover rounded-lg h-96 cursor-pointer"
+                style={{
+                  backgroundImage:
+                    "url('https://www.ptaufiqphotography.com/wp-content/uploads/2018/10/Neha-Alman-Wedding-725-scaled.jpg')",
+                }}
+              >
                 <div className="w-full px-8 py-4 overflow-hidden rounded-b-lg backdrop-blur-sm bg-white/60 dark:bg-gray-800/60">
-                    <h2 className="mt-4 text-xl font-semibold text-gray-800 capitalize dark:text-white">Block of Ui kit
-                        collections</h2>
-                    <p className="mt-2 text-lg tracking-wider text-blue-500 uppercase dark:text-blue-400 ">Ui kit</p>
+                  <h2 className="mt-4 text-xl font-semibold text-pink-900 capitalize dark:text-white">
+                    Pune
+                  </h2>
+                  
                 </div>
-            </div>
+              </div>
+           
+          </Link>
+          <Link href="/gallerydetails">
+              
+              <div
+                className="flex items-end overflow-hidden bg-cover rounded-lg h-96 cursor-pointer"
+                style={{
+                  backgroundImage:
+                    "url('https://images.shaadisaga.com/shaadisaga_production/photos/pictures/000/878/669/new_medium/DR_20190201_WED_2554.jpg?1558605075')",
+                }}
+              >
+                <div className="w-full px-8 py-4 overflow-hidden rounded-b-lg backdrop-blur-sm bg-white/60 dark:bg-gray-800/60">
+                  <h2 className="mt-4 text-xl font-semibold text-pink-900 capitalize dark:text-white">
+                    Kolkata
+                  </h2>
+                 
+                </div>
+              </div>
+           
+          </Link>
 
-            <div className="flex items-end overflow-hidden bg-cover rounded-lg h-96" style={{
-    backgroundImage: "url('https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80')",
-  }}
->
-                <div className="w-full px-8 py-4 overflow-hidden rounded-b-lg backdrop-blur-sm bg-white/60 dark:bg-gray-800/60">
-                    <h2 className="mt-4 text-xl font-semibold text-gray-800 capitalize dark:text-white">Ton’s of mobile
-                        mockup</h2>
-                    <p className="mt-2 text-lg tracking-wider text-blue-500 uppercase dark:text-blue-400 ">Mockups</p>
-                </div>
-            </div>
+           
 
          
         </div>

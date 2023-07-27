@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { AiOutlineVerticalRight, AiOutlineVerticalLeft } from "react-icons/ai";
 
 const featuredProducts = [
-  'https://wallpaperaccess.com/full/43867.jpg',
-  'https://c4.wallpaperflare.com/wallpaper/311/453/240/selective-focus-micro-photography-of-white-petaled-flower-wallpaper-preview.jpg',
+  'https://images.pexels.com/photos/6685151/pexels-photo-6685151.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  'https://images.pexels.com/photos/6500578/pexels-photo-6500578.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
 ];
 
 let count = 0;
@@ -54,12 +54,12 @@ export default function Slider() {
   };
 
   return (
-    <div ref={slideRef} className="w-full select-none relative">
+    <div ref={slideRef} className="w-full select-none relative bg-white">
       <div className="aspect-w-16 aspect-h-9">
         <img
           src={featuredProducts[currentIndex]}
           alt=""
-          style={{ width: "1500px", height: "420px" }}
+          style={{ width: "1400px", height: "600px" }}
         />
 
         {/* Overlay Content */}

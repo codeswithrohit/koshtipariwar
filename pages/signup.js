@@ -106,7 +106,7 @@ const Signup = () => {
 
   return (
     <div className='bg-white'>
-      <section class="bg-white dark:bg-gray-900">
+      <section class="bg-white dark:bg-pink-900">
         <div class="flex justify-center min-h-screen">
           <div
             class="hidden bg-cover lg:block lg:w-2/5"
@@ -117,95 +117,95 @@ const Signup = () => {
 
           <div class="flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5">
             <div class="w-full">
-              <h1 class="text-2xl font-semibold tracking-wider text-gray-800 capitalize dark:text-white">
+              <h1 class="text-2xl font-semibold tracking-wider text-pink-800 capitalize dark:text-white">
                 Get your create account now.
               </h1>
 
-              <p class="mt-4 text-gray-500 dark:text-gray-400">
+              <p class="mt-4 text-pink-500 dark:text-pink-400">
                 Let’s get you all set up so you can verify your personal account and begin setting up your profile.
               </p>
 
               <form class="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2" onSubmit={handleFormSubmit}>
                 <div>
-                  <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">User Name</label>
+                  <label class="block mb-2 text-sm text-pink-600 dark:text-pink-200">User Name</label>
                   <input
                     type="text"
                     name="username"
                     value={formData.username}
                     onChange={handleFormChange}
                     placeholder="John@123"
-                    class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                    class="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
                 <div>
-                  <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">First Name</label>
+                  <label class="block mb-2 text-sm text-pink-600 dark:text-pink-200">First Name</label>
                   <input
                     type="text"
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleFormChange}
                     placeholder="John"
-                    class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                    class="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
 
                 <div>
-                  <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Last name</label>
+                  <label class="block mb-2 text-sm text-pink-600 dark:text-pink-200">Last name</label>
                   <input
                     type="text"
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleFormChange}
                     placeholder="Snow"
-                    class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                    class="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
 
                 <div>
-                  <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Phone number</label>
+                  <label class="block mb-2 text-sm text-pink-600 dark:text-pink-200">Phone number</label>
                   <input
                     type="text"
                     name="phoneNumber"
                     value={formData.phoneNumber}
                     onChange={handleFormChange}
                     placeholder="XXX-XX-XXXX-XXX"
-                    class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                    class="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
 
                 <div>
-                  <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email address</label>
+                  <label class="block mb-2 text-sm text-pink-600 dark:text-pink-200">Email address</label>
                   <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleFormChange}
                     placeholder="johnsnow@example.com"
-                    class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                    class="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
 
                 <div>
-                  <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Password</label>
+                  <label class="block mb-2 text-sm text-pink-600 dark:text-pink-200">Password</label>
                   <input
                     type="password"
                     name="password"
                     value={formData.password}
                     onChange={handleFormChange}
                     placeholder="Enter your password"
-                    class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                    class="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
 
                 <div>
-        <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Confirm password</label>
+        <label class="block mb-2 text-sm text-pink-600 dark:text-pink-200">Confirm password</label>
         <input
           type="password"
           name="confirmPassword"
           value={formData.confirmPassword}
           onChange={handleConfirmPasswordChange} // Changed to handleConfirmPasswordChange
           placeholder="Enter your password"
-          class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+          class="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
         />
         {formData.confirmPassword && (
           <p className={passwordMatch ? 'text-green-500' : 'text-red-500'}>
@@ -215,12 +215,12 @@ const Signup = () => {
       </div>
 
                 <div>
-                  <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Gender</label>
+                  <label class="block mb-2 text-sm text-pink-600 dark:text-pink-200">Gender</label>
                   <select
                     name="gender"
                     value={formData.gender}
                     onChange={handleFormChange}
-                    class="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                    class="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   >
                     <option value="" disabled selected>
                       Select Gender
@@ -234,13 +234,13 @@ const Signup = () => {
                 </div>
 
                 <div class="col-span-2">
-                  <label class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Birth Date</label>
+                  <label class="block mb-2 text-sm text-pink-600 dark:text-pink-200">Birth Date</label>
                   <div class="flex space-x-2">
                     <select
                       name="birthDate"
                       value={formData.birthDate}
                       onChange={handleFormChange}
-                      class="block flex-1 px-1 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                      class="block flex-1 px-1 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                     >
                       <option value="" disabled selected>
                         Date
@@ -256,7 +256,7 @@ const Signup = () => {
                       name="birthMonth"
                       value={formData.birthMonth}
                       onChange={handleFormChange}
-                      class="block flex-1 px-1 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                      class="block flex-1 px-1 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                     >
                       <option value="" disabled selected>
                         Month
@@ -272,7 +272,7 @@ const Signup = () => {
                       name="birthYear"
                       value={formData.birthYear}
                       onChange={handleFormChange}
-                      class="block flex-1 px-1 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                      class="block flex-1 px-1 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                     >
                       <option value="" disabled selected>
                         Year
@@ -290,7 +290,7 @@ const Signup = () => {
                 <button
           type='submit'
           className={`w-full p-2 rounded-md ${
-            isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500'
+            isLoading ? 'bg-pink-400 cursor-not-allowed' : 'bg-pink-900'
           } text-white`}
           disabled={isLoading}
         >

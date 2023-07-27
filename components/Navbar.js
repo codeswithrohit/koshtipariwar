@@ -46,7 +46,7 @@ const Navbar = () => {
   };
 
   return (
-<div className='bg-white sticky top-2 bg-white z-50 rounded-lg '>
+<div className='bg-white sticky top-2 z-50 rounded-lg'>
 <div className="  px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 ">
       <div className="relative flex items-center justify-between">
         <div className="flex items-center">
@@ -65,7 +65,7 @@ const Navbar = () => {
                 href="/aboutus"
                 aria-label="aboutus"
                 title="aboutus"
-                className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                className="font-medium tracking-wide text-pink-900 transition-colors duration-200 hover:text-deep-purple-accent-400"
               >
                 About Us
               </Link>
@@ -75,7 +75,7 @@ const Navbar = () => {
                 href="/photogallery"
                 aria-label="photogallery"
                 title="photogallery"
-                className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                className="font-medium tracking-wide text-pink-900 transition-colors duration-200 hover:text-deep-purple-accent-400"
               >
                 Photo Gallery
               </Link>
@@ -85,7 +85,7 @@ const Navbar = () => {
                 href="/matrimonial"
                 aria-label="matrimonial"
                 title="matrimonial"
-                className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                className="font-medium tracking-wide text-pink-900 transition-colors duration-200 hover:text-deep-purple-accent-400"
               >
                 Matrimonial
               </Link>
@@ -96,7 +96,7 @@ const Navbar = () => {
                 href="/jobs"
                 aria-label="jobs"
                 title="jobs"
-                className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                className="font-medium tracking-wide text-pink-900 transition-colors duration-200 hover:text-deep-purple-accent-400"
               >
                 Jobs
               </Link>
@@ -106,7 +106,7 @@ const Navbar = () => {
                 href="/contactus"
                 aria-label="contactus"
                 title="contactus"
-                className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                className="font-medium tracking-wide text-pink-900 transition-colors duration-200 hover:text-deep-purple-accent-400"
               >
                 Contact us
               </Link>
@@ -120,7 +120,7 @@ const Navbar = () => {
                  href="/profile"
                  aria-label="Profile"
                  title="Profile"
-                 className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                 className="font-medium tracking-wide text-pink-900 transition-colors duration-200 hover:text-deep-purple-accent-400"
                >
                  Profile
                </Link>
@@ -133,7 +133,7 @@ const Navbar = () => {
                       ) : (
                         <button
                           onClick={handleLogout}
-                          className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                          className="font-medium tracking-wide text-pink-900 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
                           Logout
                         </button>
@@ -145,7 +145,7 @@ const Navbar = () => {
               
               <li>
                 
-                <Link href="/login" className="flex items-center text-black font-medium">
+                <Link href="/login" className="flex items-center text-pink-900 font-medium">
                     Log In
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -156,7 +156,7 @@ const Navbar = () => {
               <li>
                 <Link
                   href="/signup"
-                  className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                  className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-pink-900 transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                   aria-label="Sign up"
                   title="Sign up"
                 >
@@ -172,7 +172,7 @@ const Navbar = () => {
             className="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline hover:bg-deep-purple-50 focus:bg-deep-purple-50"
             onClick={() => setIsMenuOpen(true)}
           >
-            <svg className="w-5 text-gray-600" viewBox="0 0 24 24">
+            <svg className="w-5 text-pink-900" viewBox="0 0 24 24">
               <path
                 fill="currentColor"
                 d="M23,13H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,13,23,13z"
@@ -227,7 +227,7 @@ const Navbar = () => {
                         aria-label="aboutus"
                         title="aboutus"
                         onClick={handleLinkClick}
-                        className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                        className="font-medium tracking-wide text-pink-900 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
                         About US
                       </Link>
@@ -237,7 +237,7 @@ const Navbar = () => {
                         href="/photogallery"
                         aria-label="photogallery"
                         title="photogallery"
-                        className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                        className="font-medium tracking-wide text-pink-900 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
                         Photo Gallery
                       </Link>
@@ -248,7 +248,7 @@ const Navbar = () => {
                         aria-label="Matrimonial"
                         onClick={handleLinkClick}
                         title="matrimonial"
-                        className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                        className="font-medium tracking-wide text-pink-900 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
                     Matrimonial
                       </Link>
@@ -259,7 +259,7 @@ const Navbar = () => {
                         aria-label="jobs"
                         onClick={handleLinkClick}
                         title="jobs"
-                        className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                        className="font-medium tracking-wide text-pink-900 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
                     Jobs
                       </Link>
@@ -270,7 +270,7 @@ const Navbar = () => {
                         aria-label="Contact us"
                         onClick={handleLinkClick}
                         title="Contact us"
-                        className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                        className="font-medium tracking-wide text-pink-900 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
                      Contact Us
                       </Link>
@@ -284,7 +284,7 @@ const Navbar = () => {
                         aria-label="profile"
                         onClick={handleLinkClick}
                         title="profile"
-                        className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                        className="font-medium tracking-wide text-pink-900 transition-colors duration-200 hover:text-deep-purple-accent-400"
                       >
                     Profile
                       </Link>
@@ -298,7 +298,7 @@ const Navbar = () => {
                         <button
                           onClick={handleLogout}
                           
-                          className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                          className="font-medium tracking-wide text-pink-900 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
                           Logout
                         </button>
@@ -312,7 +312,7 @@ const Navbar = () => {
               <>
               <li>
                 
-                <Link   onClick={handleLinkClick} href="/login" className="flex items-center text-black font-medium">
+                <Link   onClick={handleLinkClick} href="/login" className="flex items-center text-pink-900 font-medium">
                     Log In
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -324,7 +324,7 @@ const Navbar = () => {
                               <Link
                                 href="/signup"
                                 onClick={handleLinkClick}
-                                className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                                className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-pink-900 transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                                 aria-label="Sign up"
                                 title="Sign up"
                               >
