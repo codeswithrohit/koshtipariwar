@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'fire
 import { firebase } from '../Firebase/config';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Link from 'next/link';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -97,9 +98,9 @@ const Login = () => {
                   >
                     {loading ? 'Signing in...' : 'Sign in'}
                   </button>
-                  <a href="/forgotpassword" class="inline-block mt-4 text-center text-pink-500 md:mt-0 md:mx-6 hover:underline dark:text-pink-400">
+                  <Link href="/forgotpassword" class="inline-block mt-4 text-center text-pink-500 md:mt-0 md:mx-6 hover:underline dark:text-pink-400">
                     Forgot your password?
-                  </a>
+                  </Link>
                 </div>
               </form>
             </div>
