@@ -14,10 +14,11 @@ const Signup = () => {
     email: '',
     password: '',
     confirmPassword: '',
-    gender: '',
+    category: '',
     birthDate: '',
     birthMonth: '',
     birthYear: '',
+    profileImage: null, // New state for profile image
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -34,17 +35,32 @@ const Signup = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  // Handle file selection for profile image
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setFormData({ ...formData, profileImage: file });
+  };
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
 
     try {
-      const { email, password, username, firstName, lastName, phoneNumber, gender, birthDate, birthMonth, birthYear } = formData;
+      const { email, password, username, firstName, lastName, phoneNumber, category, birthDate, birthMonth, birthYear } = formData;
 
       // Create a user with email and password
       await createUserWithEmailAndPassword(firebase.auth(), email, password);
 
-      // Store additional user data in Firestore
+      // Upload profile image to Firebase Storage if selected
+      if (formData.profileImage) {
+        const storageRef = firebase.storage().ref();
+        const imageRef = storageRef.child(`${email}/profile-image`);
+        await imageRef.put(formData.profileImage);
+        const downloadURL = await imageRef.getDownloadURL();
+        formData.profileImage = downloadURL;
+      }
+
+      // Store additional user data in Firestore, including profile image URL if selected
       const db = firebase.firestore();
       await db.collection('Users').doc(email).set({
         email,
@@ -52,10 +68,11 @@ const Signup = () => {
         firstName,
         lastName,
         phoneNumber,
-        gender,
+        category,
         birthDate,
         birthMonth,
         birthYear,
+        profileImageURL: formData.profileImage, // Store profile image URL
       });
 
       setIsLoading(false);
@@ -74,10 +91,11 @@ const Signup = () => {
         email: '',
         password: '',
         confirmPassword: '',
-        gender: '',
+        category: '',
         birthDate: '',
         birthMonth: '',
         birthYear: '',
+        profileImage: null, // Reset profile image selection
       });
     } catch (error) {
       setIsLoading(false);
@@ -88,11 +106,10 @@ const Signup = () => {
       });
     }
   };
-  
 
-  const genderOptions = [
-    { label: 'Male', value: 'male' },
-    { label: 'Female', value: 'female' },
+  const categoryOptions = [
+    { label: 'Bride', value: 'Bride' },
+    { label: 'Bride Groom', value: 'Bride Groom' },
   ];
 
   const daysOptions = Array.from({ length: 31 }, (_, index) => index + 1);
@@ -185,6 +202,7 @@ const Signup = () => {
                     class="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
+                
 
                 <div>
                   <label class="block mb-2 text-sm text-pink-600 dark:text-pink-200">Password</label>
@@ -216,23 +234,35 @@ const Signup = () => {
       </div>
 
                 <div>
-                  <label class="block mb-2 text-sm text-pink-600 dark:text-pink-200">Gender</label>
+                  <label class="block mb-2 text-sm text-pink-600 dark:text-pink-200">Category</label>
                   <select
-                    name="gender"
-                    value={formData.gender}
-                    onChange={handleFormChange}
-                    class="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
-                  >
-                    <option value="" disabled selected>
-                      Select Gender
-                    </option>
-                    {genderOptions.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
+  name="category"
+  value={formData.category}
+  onChange={handleFormChange}
+  className="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+>
+  <option value="" disabled>
+    Select Category
+  </option>
+  {categoryOptions.map((option) => (
+    <option key={option.value} value={option.value}>
+      {option.label}
+    </option>
+  ))}
+</select>
+
                 </div>
+
+                <div class="col-span-2">
+                    <label class="block mb-2 text-sm text-pink-600 dark:text-pink-200">Profile Image</label>
+                    <input
+                      type="file"
+                      name="profileImage"
+                      onChange={handleImageChange}
+                      accept="image/*"
+                      class="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                    />
+                  </div>
 
                 <div class="col-span-2">
                   <label class="block mb-2 text-sm text-pink-600 dark:text-pink-200">Birth Date</label>

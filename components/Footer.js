@@ -4,7 +4,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div className="px-4 pt-16 bg-white mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+    <div className="px-4 pt-16 bg-white mx-auto sm:max-w-xl md:max-w-full  md:px-24 lg:px-8">
       <div className="grid gap-16 row-gap-10 mb-8 lg:grid-cols-6">
         <div className="md:max-w-md lg:col-span-2">
           <Link
@@ -18,7 +18,7 @@ const Footer = () => {
           </Link>
           <div className="mt-4 lg:max-w-sm">
             <p className="text-sm text-pink-800">
-            Devang Koshti is the Vinkar class that manufactures the best liquid, soft clothes for the Gods and Gods. The attack of using both the words Devang and Koshti identically started from the Far East.
+            विणकर म्हणजे कोष्टी. कोषा पासून वस्त्रे निर्माण करणारा तो कोष्टी. झाडाच्या साली पासून वस्त्रे निर्माण करणारा तो साळी. कोष्टी हा प्रमुख घटक धरलागेला आणि भिन्न कौशल्य वापरुन अनेक प्रकारचे वस्त्र निर्माण करण्याच्या  गुणांवरुन भिन्न विणकाम करणारे विणकरवर्ग निर्माण झालेत. अशाप्रकारे विणकर, कोष्टी, साळी, इत्यादी शब्दांची निर्मिती दिसून येते.
             </p>
             
           </div>

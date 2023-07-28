@@ -35,7 +35,13 @@ const Carousel = ({ imageUrls }) => {
         <img
           src={imageUrls[currentIndex]}
           alt=""
-          style={{ width: "100%", height: "auto", maxWidth: "1500px", maxHeight: "600px" }}
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover", // This property ensures the image is best-fit inside the container without stretching
+            maxWidth: "1500px",
+            maxHeight: "600px",
+          }}
         />
         {/* Overlay Content */}
         {/* End Overlay Content */}
@@ -59,4 +65,3 @@ const Carousel = ({ imageUrls }) => {
 };
 
 export default Carousel;
-

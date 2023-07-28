@@ -5,7 +5,7 @@ import Navbar from '@/components/Navbar';
 import '@/styles/globals.css';
 
 // List of paths where Navbar and Footer should be excluded
-const excludedPaths = ['/admin/login', '/admin/home','/admin/addphotogallery','/admin/addslider','/admin/adminsignup'];
+const excludedPaths = ['/admin/login', '/admin/home','/admin/addphotogallery','/admin/addslider','/admin/adminsignup','/admin/addjob'];
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
