@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { firebase } from '../../Firebase/config';
 import 'firebase/storage';
 import 'firebase/firestore';
+import AdminNav from '../../components/AdminNav';
 
 const AddSlider = () => {
   const router = useRouter(); // Use useRouter hook
@@ -82,37 +83,7 @@ const AddSlider = () => {
 
   return (
     <>
-   <header className="bg-white dark:bg-gray-900">
-      <nav className="bg-white dark:bg-gray-900">
-        <div className="container flex flex-col items-center p-6 mx-auto">
-          <Link href="/" className="mx-auto ">
-            <img class=" w-18 h-12 mx-auto rounded-lg"
-              src="http://koshtipariwar.com/wp-content/uploads/koshti_logo3.jpg" alt="koshtipariwar" />
-          </Link>
-
-          <div className="flex items-center justify-center mt-6 text-gray-600 capitalize dark:text-gray-300">
-            <Link href="/admin/addslider" className="mx-2 text-gray-800 border-b-2 border-blue-500 dark:text-gray-200 sm:mx-6">Add Slider Data</Link>
-
-            <Link href="/admin/addphotogallery" className="mx-2 border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-500 sm:mx-6">Add Photo Gallery</Link>
-
-            <Link href="/admin/adminsignup" className="mx-2 border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-500 sm:mx-6">Create Admin Account</Link>
-
-            <Link href="/admin/addjob" className="mx-2 border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 hover:border-blue-500 sm:mx-6">Add Job</Link>
-
-            
-
-            <button
-              onClick={handleLogout}
-              className="px-4 py-2 mt-4 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-400"
-            >
-              Logout
-            </button>
-          </div>
-        </div>
-      </nav>
-
-
-    </header>
+   <AdminNav/>
       <div className="bg-white h-screen flex justify-center items-center">
         <fieldset className="w-full space-y-1 dark:text-gray-100">
           <div className="flex justify-center items-center">

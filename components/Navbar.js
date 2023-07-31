@@ -61,6 +61,16 @@ const Navbar = () => {
            src="http://koshtipariwar.com/wp-content/uploads/koshti_logo3.jpg" alt="koshtipariwar" />
           </Link>
           <ul className="flex items-center hidden space-x-8 lg:flex">
+          <li>
+              <Link
+                href="/"
+                aria-label="home"
+                title="home"
+                className="font-medium tracking-wide text-white transition-colors duration-200 hover:text-deep-purple-accent-400"
+              >
+                Home
+              </Link>
+            </li>
             <li>
               <Link
                 href="/aboutus"
