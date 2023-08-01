@@ -4,7 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { firebase } from '../Firebase/config';
 
-const contactus = () => {
+const Contactus = () => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -132,4 +132,4 @@ const contactus = () => {
   );
 };
 
-export default contactus;
+export default Contactus;
