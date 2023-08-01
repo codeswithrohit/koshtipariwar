@@ -14,7 +14,6 @@ const Signup = () => {
     email: '',
     password: '',
     confirmPassword: '',
-    category: '',
     birthDate: '',
     birthMonth: '',
     birthYear: '',
@@ -43,10 +42,29 @@ const Signup = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+
+    // Check if any required field is empty
+    for (const field in formData) {
+      if (!formData[field]) {
+        toast.error('All fields are required.', {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        return;
+      }
+    }
+
+    // Check if passwords match
+    if (formData.password !== formData.confirmPassword) {
+      toast.error('Passwords do not match.', {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      return;
+    }
+
     setIsLoading(true);
 
     try {
-      const { email, password, username, firstName, lastName, phoneNumber, category, birthDate, birthMonth, birthYear } = formData;
+      const { email, password, username, firstName, lastName, phoneNumber, birthDate, birthMonth, birthYear } = formData;
 
       // Create a user with email and password
       await createUserWithEmailAndPassword(firebase.auth(), email, password);
@@ -68,7 +86,6 @@ const Signup = () => {
         firstName,
         lastName,
         phoneNumber,
-        category,
         birthDate,
         birthMonth,
         birthYear,
@@ -91,7 +108,6 @@ const Signup = () => {
         email: '',
         password: '',
         confirmPassword: '',
-        category: '',
         birthDate: '',
         birthMonth: '',
         birthYear: '',
@@ -107,10 +123,6 @@ const Signup = () => {
     }
   };
 
-  const categoryOptions = [
-    { label: 'Bride', value: 'Bride' },
-    { label: 'Bride Groom', value: 'Bride Groom' },
-  ];
 
   const daysOptions = Array.from({ length: 31 }, (_, index) => index + 1);
 
@@ -151,6 +163,7 @@ const Signup = () => {
                     name="username"
                     value={formData.username}
                     onChange={handleFormChange}
+                    required
                     placeholder="John@123"
                     class="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
@@ -162,6 +175,7 @@ const Signup = () => {
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleFormChange}
+                    required
                     placeholder="John"
                     class="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
@@ -174,6 +188,7 @@ const Signup = () => {
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleFormChange}
+                    required
                     placeholder="Snow"
                     class="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
@@ -186,6 +201,7 @@ const Signup = () => {
                     name="phoneNumber"
                     value={formData.phoneNumber}
                     onChange={handleFormChange}
+                    required
                     placeholder="XXX-XX-XXXX-XXX"
                     class="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
@@ -198,6 +214,7 @@ const Signup = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleFormChange}
+                    required
                     placeholder="johnsnow@example.com"
                     class="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
@@ -211,6 +228,7 @@ const Signup = () => {
                     name="password"
                     value={formData.password}
                     onChange={handleFormChange}
+                    required
                     placeholder="Enter your password"
                     class="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
@@ -224,6 +242,7 @@ const Signup = () => {
           value={formData.confirmPassword}
           onChange={handleConfirmPasswordChange} // Changed to handleConfirmPasswordChange
           placeholder="Enter your password"
+          required
           class="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
         />
         {formData.confirmPassword && (
@@ -233,25 +252,7 @@ const Signup = () => {
         )}
       </div>
 
-                <div>
-                  <label class="block mb-2 text-sm text-pink-600 dark:text-pink-200">Category</label>
-                  <select
-  name="category"
-  value={formData.category}
-  onChange={handleFormChange}
-  className="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
->
-  <option value="" disabled>
-    Select Category
-  </option>
-  {categoryOptions.map((option) => (
-    <option key={option.value} value={option.value}>
-      {option.label}
-    </option>
-  ))}
-</select>
-
-                </div>
+               
 
                 <div class="col-span-2">
                     <label class="block mb-2 text-sm text-pink-600 dark:text-pink-200">Profile Image</label>
@@ -270,6 +271,7 @@ const Signup = () => {
                     <select
                       name="birthDate"
                       value={formData.birthDate}
+                      required
                       onChange={handleFormChange}
                       class="block flex-1 px-1 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                     >
@@ -287,6 +289,7 @@ const Signup = () => {
                       name="birthMonth"
                       value={formData.birthMonth}
                       onChange={handleFormChange}
+                      required
                       class="block flex-1 px-1 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                     >
                       <option value="" disabled selected>
@@ -302,6 +305,7 @@ const Signup = () => {
                     <select
                       name="birthYear"
                       value={formData.birthYear}
+                      required
                       onChange={handleFormChange}
                       class="block flex-1 px-1 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                     >

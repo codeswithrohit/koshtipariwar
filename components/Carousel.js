@@ -1,5 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from "react-icons/ai";
 
 const Carousel = ({ imageUrls }) => {
@@ -23,6 +22,16 @@ const Carousel = ({ imageUrls }) => {
     setCurrentIndex(count);
     slideRef.current.classList.add("fade-anim");
   };
+
+  useEffect(() => {
+    // Auto play the slider every 3 seconds (adjust the interval as needed)
+    const interval = setInterval(() => {
+      handleOnNextClick();
+    }, 3000);
+
+    // Clean up the interval on component unmount
+    return () => clearInterval(interval);
+  }, []);
 
   if (imageUrls.length === 0) {
     // If imageUrls array is empty, show a placeholder or loading spinner

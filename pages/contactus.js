@@ -40,7 +40,7 @@ const contactus = () => {
 
   return (
     <div className="bg-white m-auto min-h-screen">
-      <section className="min-h-screen bg-white ">
+      <section className=" ">
         <div className="container px-6 py-10 mx-auto">
           <div className="lg:flex lg:items-center lg:-mx-10">
             <div className="lg:w-1/2 lg:mx-10">

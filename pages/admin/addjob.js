@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router';
@@ -73,11 +73,11 @@ const AddJob = () => {
 
   return (
     <>
-      <AdminNav/>
+      <AdminNav />
       <div className="min-h-screen w-full flex items-center justify-center bg-white">
         <div>
           <h1 className="mb-1 font-bold text-3xl flex gap-1 items-baseline font-mono">
-            Upload Events<span className="text-sm text-pink-900">form showcase</span>
+            Upload jobs<span className="text-sm text-pink-900">form showcase</span>
           </h1>
           <form onSubmit={handleSubmit}>
             <div className="grid max-w-3xl gap-2 py-10 px-8 sm:grid-cols-2 bg-white rounded-md border-t-4 border-pink-900">
@@ -100,25 +100,8 @@ const AddJob = () => {
                   </label>
                 </div>
               </div>
-              {/* Input field for description */}
-              <div className="grid">
-                <div className="bg-white flex min-h-[60px] flex-col-reverse justify-center rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:shadow-inner">
-                  <input
-                    type="text"
-                    name="description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    className="peer block w-full border-0 p-0 text-base text-gray-900 placeholder-gray-400 focus:ring-0"
-                    placeholder="Job Description"
-                  />
-                  <label
-                    htmlFor="description"
-                    className="block transform text-xs font-bold uppercase text-gray-400 transition-opacity, duration-200 peer-placeholder-shown:h-0 peer-placeholder-shown:-translate-y-full peer-placeholder-shown:opacity-0"
-                  >
-                    Job Description
-                  </label>
-                </div>
-              </div>
+            
+
               {/* Input field for salary */}
               <div className="grid">
                 <div className="bg-white flex min-h-[60px] flex-col-reverse justify-center rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:shadow-inner">
@@ -138,13 +121,33 @@ const AddJob = () => {
                   </label>
                 </div>
               </div>
-              <button
-                type="submit"
-                className="mt-4 bg-pink-900 text-white py-2 px-6 rounded-md hover:bg-pink-600"
-                disabled={isUploading} // Disable the button during loading
-              >
-                {isUploading ? 'Uploading...' : 'Submit'}
-              </button>
+              {/* Input field for description */}
+              <div className="grid w-full">
+                <div className="bg-white flex min-h-[96px] flex-col-reverse justify-center rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:shadow-inner">
+                  <textarea
+                    name="description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    className="peer block w-96 border-0 p-0 text-base text-gray-900 placeholder-gray-400 focus:ring-0 resize-none h-48" // Adjust the height using h-10 (you can change the value to your desired height)
+                    placeholder="Job Description"
+                  />
+                  <label
+                    htmlFor="description"
+                    className="block transform text-xs font-bold uppercase text-gray-400 transition-opacity, duration-200 peer-placeholder-shown:h-0 peer-placeholder-shown:-translate-y-full peer-placeholder-shown:opacity-0"
+                  >
+                    Job Description
+                  </label>
+                </div>
+              </div>
+              <div className="col-span-2">
+                <button
+                  type="submit"
+                  className="w-full mt-4 bg-pink-900 text-white py-2 px-6 rounded-md hover:bg-pink-600"
+                  disabled={isUploading} // Disable the button during loading
+                >
+                  {isUploading ? 'Uploading...' : 'Submit'}
+                </button>
+              </div>
             </div>
           </form>
           <ToastContainer />

@@ -7,6 +7,7 @@ const AdminHome = () => {
   const router = useRouter(); // Use useRouter hook
   const [isAdmin, setIsAdmin] = useState(false); // State variable to check if the user is an admin
   const [usersData, setUsersData] = useState([]);
+  const [matrimonialData, setMatrimonialData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   // Check if the user is an admin when the component mounts
@@ -80,6 +81,45 @@ const [totalBrideGrooms, setTotalBrideGrooms] = useState(0);
         setIsLoading(false); // Set loading to false even on error
       });
   }, []);
+
+  useEffect(() => {
+    // Call the function to check authentication status
+  
+    // Fetch data from the 'Users' collection
+    const db = firebase.firestore();
+    const usersRef = db.collection('matrimonials');
+  
+    usersRef
+      .get()
+      .then((querySnapshot) => {
+        const matrimonialData = [];
+        let totalGrooms = 0;
+        let totalBrideGrooms = 0;
+  
+        querySnapshot.forEach((doc) => {
+          const user = doc.data();
+          matrimonialData.push(user);
+  
+          // Check the 'Category' field to determine the count of each category
+          if (user.category === 'Bride') {
+            totalGrooms++;
+          } else if (user.category === 'Bride Groom') {
+            totalBrideGrooms++;
+          }
+        });
+  
+        setMatrimonialData(matrimonialData);
+        setIsLoading(false); // Set loading to false when data is fetched
+  
+        // Set the counts in the state
+        setTotalGrooms(totalGrooms);
+        setTotalBrideGrooms(totalBrideGrooms);
+      })
+      .catch((error) => {
+        console.error('Error getting documents: ', error);
+        setIsLoading(false); // Set loading to false even on error
+      });
+  }, []);
   
 
 
@@ -137,6 +177,11 @@ const [totalBrideGrooms, setTotalBrideGrooms] = useState(0);
     <Link href="/admin/manageusers">
       <button className="relative w-40 h-12 overflow-hidden border border-pink-600 text-pink-600 shadow-2xl transition-all duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:m-auto before:h-0 before:w-0 before:rounded-sm before:bg-pink-600 before:duration-300 before:ease-out hover:text-white hover:shadow-pink-600 hover:before:h-40 hover:before:w-40 hover:before:opacity-80">
         <span className="relative z-10">Manage Users</span>
+      </button>
+    </Link>
+    <Link href="/admin/managematrimonial">
+      <button className="relative w-40 h-12 overflow-hidden border border-pink-600 text-pink-600 shadow-2xl transition-all duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:m-auto before:h-0 before:w-0 before:rounded-sm before:bg-pink-600 before:duration-300 before:ease-out hover:text-white hover:shadow-pink-600 hover:before:h-40 hover:before:w-40 hover:before:opacity-80">
+        <span className="relative z-10">Manage Matrimonial</span>
       </button>
     </Link>
     <Link href='/admin/managecarousel' >

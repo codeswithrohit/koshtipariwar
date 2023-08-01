@@ -8,7 +8,7 @@ const Matrimonial = () => {
   const router = useRouter(); // Access the router
   const [usersData, setUsersData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [category, setCategory] = useState('Bride'); // Add state for category
+  const [category, setCategory] = useState('All'); // Add state for category
 
   useEffect(() => {
     // Check if the user is logged in
@@ -16,7 +16,7 @@ const Matrimonial = () => {
       if (user) {
         // User is logged in, fetch data from the 'Users' collection
         const db = firebase.firestore();
-        const usersRef = db.collection('Users');
+        const usersRef = db.collection('matrimonials');
 
         usersRef
           .get()
@@ -98,16 +98,19 @@ const Matrimonial = () => {
                   <li key={idx} className="gap-8 sm:flex">
                     <div className="w-80 h-80">
                       <img
-                        src={user.profileImageURL || 'https://via.placeholder.com/150'}
+                        src={user.photo || 'https://via.placeholder.com/150'}
                         className="w-full h-full object-cover object-center shadow-md rounded-xl"
                         alt=""
                       />
                     </div>
 
                     <div className="mt-4 sm:mt-0">
-                      <h4 className="text-lg text-gray-700 font-semibold">{user.firstName} {user.lastName}</h4>
-                      <p className="text-indigo-600">{user.email} </p>
-                      <p className="text-gray-600 mt-2">{user.phoneNumber}</p>
+                      <h4 className="text-lg text-gray-700 font-semibold">{user.MatrimonialName}</h4>
+                      <p className="text-indigo-600">{user.emailAddress} </p>
+                      <p className="text-gray-600 mt-2">{user.contactNumber}</p>
+                      <p className="text-gray-600 mt-2">Education: {user.education}</p>
+                      <p className="text-gray-600 mt-2">Income: {user.income}</p>
+                      <p className="text-gray-600 mt-2">Occupation: {user.occupation}</p>
                       <div className="mt-3 flex gap-4 text-gray-400">
                         Date of Birth: {user.birthDate}/{user.birthMonth}/{user.birthYear}
                       </div>

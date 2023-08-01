@@ -37,17 +37,18 @@ const Jobs = () => {
         jobsData.map((job, idx) => (
           <div key={idx} className="min-h-screen flex items-center justify-center bg-white">
             <div className="max-w-2xl px-8 py-4 bg-white rounded-lg shadow-md">
-              <div className="flex items-center justify-between">
-                <a className="px-3 py-1 text-sm font-bold text-pink-100 transition-colors duration-300 transform bg-pink-600 rounded cursor-pointer hover:bg-pink-500" tabIndex="0" role="button">
-                  ₹ {job.salary}
-                </a>
-              </div>
+             
 
               <div className="mt-2">
                 <a href="#" className="text-xl font-bold text-pink-700 dark:text-white hover:text-pink-600 dark:hover:text-pink-200 hover:underline" tabIndex="0" role="link">
                   {job.title}
                 </a>
                 <p className="mt-2 text-pink-600 dark:text-pink-300">{job.description}</p>
+              </div>
+              <div className="flex items-center justify-between mt-5 ml-96">
+                <a className="px-3 py-1 text-sm font-bold text-pink-100 transition-colors duration-300 transform bg-pink-600 rounded cursor-pointer hover:bg-pink-500" tabIndex="0" role="button">
+                  ₹ {job.salary}
+                </a>
               </div>
             </div>
           </div>

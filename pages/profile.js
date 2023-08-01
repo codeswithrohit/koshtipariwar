@@ -58,6 +58,8 @@ const Profile = () => {
     }
   };
 
+  
+
   const handlePasswordChange = () => {
     // Check if the new password and confirm password match
     if (newPassword !== confirmPassword) {
@@ -90,6 +92,10 @@ const Profile = () => {
         toast.error('Invalid old password.');
       });
   };
+  const handleAddMatrimonial = () => {
+    // Here, you can navigate to the "addmatrimonial" page when the button is clicked
+    router.push('/addmatrimonial');
+  };
 
   if (isLoading) {
     return <Spinner />; // Show spinner while loading data
@@ -121,6 +127,9 @@ const Profile = () => {
             <p className="pt-4 text-base font-bold flex items-center justify-center lg:justify-start">
               <FcCalendar className="h-12 w-12 fill-current text-pink-900 pr-4" /> {userData.birthDate}/{userData.birthMonth}/{userData.birthYear}
             </p>
+            <button className="mt-4 mr-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleAddMatrimonial}>
+        Add Matrimonial
+      </button>
 
             <button className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => setShowChangePassword(true)}>
               Change Password
