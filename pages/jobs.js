@@ -35,7 +35,7 @@ const Jobs = () => {
         </div>
       ) : (
         jobsData.map((job, idx) => (
-          <div key={idx} className="min-h-screen flex items-center justify-center bg-white">
+          <div key={idx} className="m-auto min-h-screen bg-white dark:bg-white flex items-center justify-center ">
             <div className="max-w-2xl px-8 py-4 bg-white rounded-lg shadow-md">
              
 

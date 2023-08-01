@@ -49,7 +49,7 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="m-auto min-h-screen bg-white dark:bg-white">
       <Head>
         <title>Koshti Pariwar</title>
         <meta name="Koshti Pariwar" content="Dizi Global Solution" />

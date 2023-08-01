@@ -25,7 +25,7 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-white">
+    <div className="flex justify-center items-center m-auto min-h-screen bg-white dark:bg-white">
       <div className="w-full max-w-sm p-4 bg-white shadow-md rounded-lg">
         <h2 className="text-2xl font-semibold mb-4">Forgot Password</h2>
         <p className="text-gray-600 mb-4">Enter your email address to reset your password.</p>

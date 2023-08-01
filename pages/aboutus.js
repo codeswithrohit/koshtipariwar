@@ -3,7 +3,7 @@ import React from 'react'
 
 const aboutus = () => {
   return (
-  <div className='m-auto min-h-screen bg-white'>
+  <div className='m-auto min-h-screen bg-white dark:bg-white'>
      <section className="py-14">
             <div className="max-w-screen-xl mx-auto md:px-8">
                 <div className="items-center gap-x-12 sm:px-4 md:px-0 lg:flex">

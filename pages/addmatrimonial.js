@@ -97,7 +97,7 @@ const AddMatrimonial = () => {
   const yearsOptions = Array.from({ length: currentYear - 1899 }, (_, index) => currentYear - index);
 
   return (
-    <div className="m-auto min-h-screen bg-white flex items-center">
+    <div className="m-auto min-h-screen bg-white dark:bg-white flex items-center">
       <section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-white">
         <h2 className="text-lg font-semibold text-pink-800 capitalize dark:text-white">Add Matrimonial</h2>
 

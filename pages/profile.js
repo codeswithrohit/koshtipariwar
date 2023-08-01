@@ -106,7 +106,7 @@ const Profile = () => {
   }
 
   return (
-    <body className="font-sans antialiased text-gray-900 leading-normal tracking-wider bg-cover" style={{ backgroundImage: "url('https://source.unsplash.com/1L71sPT5XKc')" }}>
+    <body className="m-auto min-h-screen bg-white dark:bg-white font-sans antialiased text-gray-900 leading-normal tracking-wider bg-cover" style={{ backgroundImage: "url('https://source.unsplash.com/1L71sPT5XKc')" }}>
       <div className="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
 
         {/*Main Col*/}

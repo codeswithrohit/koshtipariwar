@@ -94,7 +94,7 @@ const ManageUsers = () => {
   };
   const renderUsers = currentUsers.map((user) => (
     <tr key={user.id}>
-      <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
+      <td className=" px-5 py-5 text-sm bg-white border-b border-gray-200">
         <div className="flex items-center">
           <div className="flex-shrink-0">
             <a href="#" className="relative block">
@@ -151,7 +151,7 @@ const ManageUsers = () => {
   return (
     <>
       <AdminNav/>
-      <div className="bg-white">
+      <div className="m-auto min-h-screen bg-white dark:bg-white">
         <div className="container max-w-3xl px-4 mx-auto sm:px-8">
           <div className="py-8">
             <div className="flex flex-row justify-between w-full mb-1 sm:mb-0">

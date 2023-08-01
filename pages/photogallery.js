@@ -23,7 +23,7 @@ const Photogallery = () => {
   }, []);
 
   return (
-    <div className='m-auto min-h-screen bg-white'>
+    <div className='m-auto min-h-screen bg-white dark:bg-white'>
       <section className="bg-white dark:bg-gray-900">
         <div className="container px-6 py-10 mx-auto">
           <h1 className="text-2xl font-semibold text-center text-pink-900 capitalize lg:text-3xl dark:text-white">

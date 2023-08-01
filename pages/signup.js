@@ -135,8 +135,8 @@ const Signup = () => {
   const yearsOptions = Array.from({ length: currentYear - 1899 }, (_, index) => currentYear - index);
 
   return (
-    <div className='bg-white'>
-      <section class="bg-white dark:bg-pink-900">
+    <div className='m-auto min-h-screen bg-white dark:bg-white'>
+      <section class="m-auto min-h-screen bg-white dark:bg-white">
         <div class="flex justify-center min-h-screen">
           <div
             class="hidden bg-cover lg:block lg:w-2/5"

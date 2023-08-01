@@ -35,7 +35,7 @@ const Gallerydetails = () => {
   };
 
   return (
-    <div className='m-auto min-h-screen bg-white'>
+    <div className='m-auto min-h-screen bg-white dark:bg-white'>
       <section className="py-6 dark:bg-gray-800 dark:text-gray-50">
         {isLoading ? (
           <Spinner /> // Show the spinner while loading data

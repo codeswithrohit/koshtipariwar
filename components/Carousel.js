@@ -39,7 +39,10 @@ const Carousel = ({ imageUrls }) => {
   }
 
   return (
-    <div ref={slideRef} className="w-full select-none relative bg-white">
+    <div
+      ref={slideRef}
+      className="w-full select-none relative bg-white rounded-lg overflow-hidden" // Added rounded-lg and overflow-hidden
+    >
       <div className="aspect-w-16 aspect-h-9">
         <img
           src={imageUrls[currentIndex]}
@@ -49,7 +52,7 @@ const Carousel = ({ imageUrls }) => {
             height: "100%",
             objectFit: "cover", // This property ensures the image is best-fit inside the container without stretching
             maxWidth: "1500px",
-            maxHeight: "600px",
+            maxHeight: "500px",
           }}
         />
         {/* Overlay Content */}

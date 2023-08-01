@@ -82,7 +82,7 @@ const AdminSignup = () => {
   return (
     <>
  <AdminNav/>
-    <main className="w-full h-screen flex flex-col items-center justify-center bg-white sm:px-4">
+    <main className="w-full m-auto min-h-screen bg-white dark:bg-white flex flex-col items-center justify-center  sm:px-4">
         <div className="w-full space-y-6 text-gray-600 sm:max-w-md">
           <div className="text-center">
             <Link href="/admin/home" className="mx-auto ">

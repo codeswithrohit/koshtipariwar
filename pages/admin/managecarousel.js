@@ -82,7 +82,7 @@ const ManageCarousel = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="m-auto min-h-screen bg-white dark:bg-white">
       <AdminNav/>
       {isLoading ? (
         <div>Loading...</div>

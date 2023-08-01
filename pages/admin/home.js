@@ -128,7 +128,7 @@ const [totalBrideGrooms, setTotalBrideGrooms] = useState(0);
   }
 
   return (
-   <div className='bg-white min-h-screen'>
+   <div className='m-auto min-h-screen bg-white dark:bg-white'>
   <AdminNav/>
     <section className="p-4 my-6 md:p-8 bg-white text-pink-900">
 	<div className="container grid grid-cols-1 gap-6 m-4 mx-auto md:m-0 md:grid-cols-2 xl:grid-cols-3">

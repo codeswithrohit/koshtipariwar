@@ -66,7 +66,7 @@ const Login = () => {
 
   return (
     <>
-   <div className="flex items-center justify-center h-screen bg-white">
+   <div className="flex items-center justify-center m-auto min-h-screen bg-white dark:bg-white">
         <div className="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
           <div className="px-6 py-4">
             <div className="flex justify-center mx-auto">

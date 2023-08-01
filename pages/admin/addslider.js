@@ -84,7 +84,7 @@ const AddSlider = () => {
   return (
     <>
    <AdminNav/>
-      <div className="bg-white h-screen flex justify-center items-center">
+      <div className="m-auto min-h-screen bg-white dark:bg-white flex justify-center items-center">
         <fieldset className="w-full space-y-1 dark:text-gray-100">
           <div className="flex justify-center items-center">
             <label htmlFor="files" className="block text-sm font-medium mb-">
