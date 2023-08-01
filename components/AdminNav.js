@@ -19,7 +19,7 @@ const AdminNav = () => {
   };
 
   return (
-<div className='bg-pink-900 sticky top-2 z-50 rounded-lg'>
+<div className="bg-red-600 sticky top-2 z-50 rounded-lg">
 <div className="  px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 ">
       <div className="relative flex items-center justify-between">
         <div className="flex items-center">
@@ -117,7 +117,7 @@ const AdminNav = () => {
           </button>
           {isMenuOpen && (
             <div className="absolute top-0 left-0 w-full">
-              <div className="p-5 bg-pink-900 border rounded shadow-sm">
+              <div className="p-5 bg-red-600 border rounded shadow-sm">
                 <div className="flex items-center justify-between mb-4">
                   <div>
                     <Link

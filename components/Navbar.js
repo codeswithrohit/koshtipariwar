@@ -240,7 +240,7 @@ const Navbar = () => {
             </button>
             {isMenuOpen && (
               <div className="absolute top-0 left-0 w-full">
-                <div className="p-5 bg-pink-900 border rounded shadow-sm">
+                <div className="p-5 bg-red-600 border rounded shadow-sm">
                   <div className="flex items-center justify-between mb-4">
                     <div>
                       <Link
