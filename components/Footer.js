@@ -19,16 +19,16 @@ const Footer = () => {
             <span className="block uppercase text-pink-900 text-sm font-semibold mb-2">Policy</span>
             <ul className="list-unstyled">
               <li>
-                <a className="text-pink-900 hover:text-pink-500 font-semibold block pb-2 text-sm" href="/">Term And Condition</a>
+                <Link className="text-pink-900 hover:text-pink-500 font-semibold block pb-2 text-sm" href="/">Term And Condition</Link>
               </li>
               <li>
-                <a className="text-pink-900 hover:text-pink-500 font-semibold block pb-2 text-sm" href="/">Refunfd Policy</a>
+                <Link className="text-pink-900 hover:text-pink-500 font-semibold block pb-2 text-sm" href="/">Refunfd Policy</Link>
               </li>
               <li>
-                <a className="text-pink-900 hover:text-pink-500 font-semibold block pb-2 text-sm" href="/">Cancellation Policy</a>
+                <Link className="text-pink-900 hover:text-pink-500 font-semibold block pb-2 text-sm" href="/">Cancellation Policy</Link>
               </li>
               <li>
-                <a className="text-pink-900 hover:text-pink-500 font-semibold block pb-2 text-sm" href="/">Privacy Policy</a>
+                <Link className="text-pink-900 hover:text-pink-500 font-semibold block pb-2 text-sm" href="/">Privacy Policy</Link>
               </li>
             </ul>
           </div>
@@ -36,16 +36,16 @@ const Footer = () => {
             <span className="block uppercase text-pink-900 text-sm font-semibold mb-2">Other Resources</span>
             <ul className="list-unstyled">
               <li>
-                <a className="text-pink-900 hover:text-pink-500 font-semibold block pb-2 text-sm" href="/">About Us</a>
+                <Link className="text-pink-900 hover:text-pink-500 font-semibold block pb-2 text-sm" href="/">About Us</Link>
               </li>
               <li>
-                <a className="text-pink-900 hover:text-pink-500 font-semibold block pb-2 text-sm" href="/">Photo Gallery</a>
+                <Link className="text-pink-900 hover:text-pink-500 font-semibold block pb-2 text-sm" href="/">Photo Gallery</Link>
               </li>
               <li>
-                <a className="text-pink-900 hover:text-pink-500 font-semibold block pb-2 text-sm" href="/">Matrimonial</a>
+                <Link className="text-pink-900 hover:text-pink-500 font-semibold block pb-2 text-sm" href="/">Matrimonial</Link>
               </li>
               <li>
-                <a className="text-pink-900 hover:text-pink-500 font-semibold block pb-2 text-sm" href="/">Jobs</a>
+                <Link className="text-pink-900 hover:text-pink-500 font-semibold block pb-2 text-sm" href="/">Jobs</Link>
               </li>
             </ul>
           </div>
