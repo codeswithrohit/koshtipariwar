@@ -7,20 +7,20 @@ const Carousel = ({ imageUrls }) => {
   let count = 0;
 
   const removeAnimation = () => {
-    slideRef.current.classList.remove("fade-anim");
+    slideRef.current?.classList.remove("fade-anim");
   };
 
   const handleOnNextClick = () => {
     count = (count + 1) % imageUrls.length;
     setCurrentIndex(count);
-    slideRef.current.classList.add("fade-anim");
+    slideRef.current?.classList.add("fade-anim");
   };
 
   const handleOnPrevClick = () => {
     const imagesLength = imageUrls.length;
     count = (count + imagesLength - 1) % imagesLength;
     setCurrentIndex(count);
-    slideRef.current.classList.add("fade-anim");
+    slideRef.current?.classList.add("fade-anim");
   };
 
   useEffect(() => {
@@ -40,23 +40,28 @@ const Carousel = ({ imageUrls }) => {
 
   return (
     <div
-      ref={slideRef}
-      className="w-full select-none relative bg-white rounded-lg overflow-hidden" // Added rounded-lg and overflow-hidden
+      className="w-full select-none relative rounded-lg overflow-hidden" // Removed bg-white class
     >
-      <div className="aspect-w-16 aspect-h-9">
-        <img
-          src={imageUrls[currentIndex]}
-          alt=""
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover", // This property ensures the image is best-fit inside the container without stretching
-            maxWidth: "1500px",
-            maxHeight: "500px",
-          }}
-        />
-        {/* Overlay Content */}
-        {/* End Overlay Content */}
+      {/* Added pink border here */}
+      <div
+        className="border-pink-500 border-4 rounded-lg"
+        ref={slideRef}
+      >
+        <div className="aspect-w-16 aspect-h-9">
+          <img
+            src={imageUrls[currentIndex]}
+            alt=""
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover", // This property ensures the image is best-fit inside the container without stretching
+              maxWidth: "1500px",
+              maxHeight: "420px",
+            }}
+          />
+          {/* Overlay Content */}
+          {/* End Overlay Content */}
+        </div>
       </div>
       <div className="absolute w-full top-1/2 transform -translate-y-1/2 px-3 flex justify-between items-center">
         <button
@@ -77,3 +82,5 @@ const Carousel = ({ imageUrls }) => {
 };
 
 export default Carousel;
+
+

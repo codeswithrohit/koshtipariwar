@@ -5,8 +5,10 @@ import { firebase } from '../Firebase/config';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const Login = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -32,7 +34,8 @@ const Login = () => {
       toast.success('Login successful.', {
         position: toast.POSITION.TOP_RIGHT,
       });
-
+      
+      router.push('/')
       // Redirect to dashboard or other authenticated page
       // You can use React Router or other methods to handle the redirection
 
@@ -105,12 +108,7 @@ const Login = () => {
               </form>
             </div>
           </div>
-          <div class="mt-8 md:mt-24 sm:flex sm:items-center">
-            <h3 class="text-pink-500 dark:text-pink-400 sm:w-1/2">Social networks</h3>
-            <div class="flex items-center mt-4 sm:mt-0 -mx-1.5 sm:w-1/2">
-              {/* ... (your social media icons) ... */}
-            </div>
-          </div>
+         
         </div>
       </section>
       <ToastContainer />

@@ -56,16 +56,17 @@ const Managematrimonial = () => {
           <div className="grid gap-8 mt-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {matrimonialsData.map((matrimonial) => (
               <div className="w-full max-w-xs text-center" key={matrimonial.id}>
+               
                 <img
                   className="object-cover object-center w-full h-48 mx-auto rounded-lg"
-                  src={matrimonial.photo || 'https://via.placeholder.com/150'}
+                  src={Array.isArray(matrimonial.photos) && matrimonial.photos.length > 0 ? matrimonial.photos[0] : "https://via.placeholder.com/150"}
                   alt="avatar"
                 />
 
                 <div className="mt-2">
-                  <h3 className="text-lg font-medium text-gray-700 dark:text-gray-200">{matrimonial.MatrimonialName}</h3>
-                  <h3 className="text-lg font-medium text-gray-700 dark:text-gray-200">{matrimonial.emailAddress}</h3>
-                  <h3 className="text-lg font-medium text-gray-700 dark:text-gray-200">{matrimonial.category}</h3>
+                  <h3 className="text-lg font-medium text-gray-700 dark:text-gray-200">{matrimonial.name}</h3>
+                  <h3 className="text-lg font-medium text-gray-700 dark:text-gray-200">{matrimonial.email}</h3>
+                  <h3 className="text-lg font-medium text-gray-700 dark:text-gray-200">{matrimonial.gender}</h3>
                 </div>
               </div>
             ))}

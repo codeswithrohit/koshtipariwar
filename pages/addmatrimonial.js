@@ -1,308 +1,369 @@
-import React, { useState, useEffect } from 'react';
-import { getFirestore, doc, setDoc } from 'firebase/firestore';
+/* eslint-disable @next/next/no-img-element */
+import React, { useState } from 'react';
 import { firebase } from '../Firebase/config';
-import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useRouter } from 'next/router';
 
-const AddMatrimonial = () => {
-  const router = useRouter(); // Access the router
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [matrimonialData, setMatrimonialData] = useState({
-    MatrimonialName: '',
-    emailAddress: '',
-    contactNumber: '',
+const FormComponent = () => {
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    parentName: '',
+    mobileNumber: '',
+    parentAddress: '',
+    yourAddress: '',
+    dob: '',
+    birthplace: '',
+    height: '',
+    education: '',
     occupation: '',
-    photo: '', // New field: photo URL
-    income: '', // New field: monthly/annually income
-    category: '', // New field: category (e.g., Bride, Groom)
-    education: '', // New field: education
-    birthDate: '',
-    birthMonth: '',
-    birthYear: '',
+    monthlyIncome: '',
+    aboutMe: '',
+    photos: [],
+    sameAsParentAddress: false,
+    email: '',
+    gender: '',
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setMatrimonialData((prevState) => ({
-      ...prevState,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
     }));
   };
 
-  const handlePhotoUpload = async (e) => {
-    const file = e.target.files[0];
-    try {
-      setIsLoading(true);
-      const storage = getStorage();
-      const storageRef = ref(storage, `matrimonial_photos/${file.name}`);
-      await uploadBytes(storageRef, file);
-      const downloadURL = await getDownloadURL(storageRef);
-      setMatrimonialData((prevState) => ({
-        ...prevState,
-        photo: downloadURL,
+  const handleCheckboxChange = (e) => {
+    const { name, checked } = e.target;
+    if (checked) {
+      setFormData((prevData) => ({
+        ...prevData,
+        yourAddress: formData.parentAddress,
+        [name]: checked,
       }));
-    } catch (error) {
-      console.error('Error uploading photo:', error);
-      toast.error('An error occurred while uploading the photo.');
-    } finally {
-      setIsLoading(false);
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: checked,
+      }));
     }
+  };
+
+  const handlePhotoUpload = (e) => {
+    const files = e.target.files;
+    const photos = Array.from(files).slice(0, 5); // Limit to 5 photos
+    setFormData((prevData) => ({
+      ...prevData,
+      photos: photos,
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    setLoading(true);
 
     try {
-      const db = getFirestore();
-      // Add your collection name here. Replace 'matrimonials' with the actual collection name
-      const matrimonialsRef = doc(db, 'matrimonials', 'matrimonial_id'); // Replace 'matrimonial_id' with a unique ID for the matrimonial
+      // Save data to Firestore
+      const collectionRef = firebase.firestore().collection('matrimonials');
 
-      // Add matrimonial data to Firestore
-      await setDoc(matrimonialsRef, matrimonialData);
+      // Upload photos to Firebase Storage and get their URLs
+      const photoURLs = [];
+      for (const photo of formData.photos) {
+        const storageRef = firebase.storage().ref();
+        const fileRef = storageRef.child(photo.name);
+        await fileRef.put(photo);
+        const url = await fileRef.getDownloadURL();
+        photoURLs.push(url);
+      }
 
-      toast.success('Matrimonial added successfully.');
-      setMatrimonialData({
-        MatrimonialName: '',
-        emailAddress: '',
-        contactNumber: '',
-        occupation: '',
-        photo: '',
-        income: '',
-        category: '',
+      // Add the image URLs to the form data
+      const formDataWithPhotoURLs = { ...formData, photos: photoURLs };
+
+      // Add the complete form data to Firestore
+      await collectionRef.add(formDataWithPhotoURLs);
+
+      console.log('Data submitted successfully!');
+      toast.success('Matrimonial data submitted successfully!');
+
+      // Reset the form data to its initial state after successful submission
+      setFormData({
+        name: '',
+        parentName: '',
+        mobileNumber: '',
+        parentAddress: '',
+        yourAddress: '',
+        dob: '',
+        birthplace: '',
+        height: '',
         education: '',
-        birthDate: '',
-        birthMonth: '',
-        birthYear: '',
+        occupation: '',
+        monthlyIncome: '',
+        aboutMe: '',
+        photos: [],
+        sameAsParentAddress: false,
+        email: '',
+        gender: '',
       });
     } catch (error) {
-      console.error('Error adding matrimonial:', error);
-      toast.error('An error occurred while adding the matrimonial.');
+      console.error('Error submitting data: ', error);
+      toast.error('Error submitting data. Please try again later.');
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
-
-  const daysOptions = Array.from({ length: 31 }, (_, index) => index + 1);
-
-  const monthsOptions = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
-  ];
-
-  const currentYear = new Date().getFullYear();
-  const yearsOptions = Array.from({ length: currentYear - 1899 }, (_, index) => currentYear - index);
-
   return (
-    <div className="m-auto min-h-screen bg-white dark:bg-white flex items-center">
-      <section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-white">
-        <h2 className="text-lg font-semibold text-pink-800 capitalize dark:text-white">Add Matrimonial</h2>
-
-        <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+    <div className="bg-white dark:bg-white min-h-screen">
+      <div className="container mx-auto p-4">
+        <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+          <h2 className="text-2xl font-bold mb-4">Matrimonial Information</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="text-pink-800 dark:text-pink-900" htmlFor="MatrimonialName">
-                Matrimonial Name
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                Name<span className="text-red-500">*</span>
               </label>
               <input
-                id="MatrimonialName"
-                name="MatrimonialName"
                 type="text"
-                value={matrimonialData.MatrimonialName}
+                name="name"
+                value={formData.name}
                 onChange={handleChange}
-                className="block w-full px-4 py-2 mt-2 text-pink-800 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                placeholder="Your Name"
                 required
+                className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
-
             <div>
-              <label className="text-pink-800 dark:text-pink-900" htmlFor="emailAddress">
-                Email Address
+              <label htmlFor="parentName" className="block text-sm font-medium text-gray-700">
+                Parent Name<span className="text-red-500">*</span>
               </label>
               <input
-                id="emailAddress"
-                name="emailAddress"
+                type="text"
+                name="parentName"
+                value={formData.parentName}
+                onChange={handleChange}
+                placeholder="Parent Name"
+                required
+                className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div>
+              <label htmlFor="mobileNumber" className="block text-sm font-medium text-gray-700">
+                Mobile Number<span className="text-red-500">*</span>
+              </label>
+              <input
+                type="tel"
+                name="mobileNumber"
+                value={formData.mobileNumber}
+                onChange={handleChange}
+                placeholder="123-456-7890"
+                required
+                className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                Your Email ID<span className="text-red-500">*</span>
+              </label>
+              <input
                 type="email"
-                value={matrimonialData.emailAddress}
+                name="email"
+                value={formData.email}
                 onChange={handleChange}
-                className="block w-full px-4 py-2 mt-2 text-pink-800 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                placeholder="example@example.com"
                 required
+                className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
-
             <div>
-              <label className="text-pink-800 dark:text-pink-900" htmlFor="contactNumber">
-                Contact Number
+              <label htmlFor="parentAddress" className="block text-sm font-medium text-gray-700">
+                Parent Address<span className="text-red-500">*</span>
               </label>
-              <input
-                id="contactNumber"
-                name="contactNumber"
-                type="number"
-                value={matrimonialData.contactNumber}
+              <textarea
+                name="parentAddress"
+                value={formData.parentAddress}
                 onChange={handleChange}
-                className="block w-full px-4 py-2 mt-2 text-pink-800 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                placeholder="123 Main St, City, Country"
                 required
+                rows={4}
+                className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
-
             <div>
-              <label className="text-pink-800 dark:text-pink-900" htmlFor="occupation">
-                Occupation
+              <label htmlFor="yourAddress" className="block text-sm font-medium text-gray-700">
+                Your Address<span className="text-red-500">*</span>
+              </label>
+              <textarea
+                name="yourAddress"
+                value={formData.yourAddress}
+                onChange={handleChange}
+                placeholder="123 Main St, City, Country"
+                required={!formData.sameAsParentAddress}
+                rows={4}
+                className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              />
+              <div className="col-span-2">
+              <label className="inline-flex items-center mt-1">
+                <input
+                  type="checkbox"
+                  name="sameAsParentAddress"
+                  checked={formData.sameAsParentAddress}
+                  onChange={handleCheckboxChange}
+                  className="form-checkbox h-5 w-5 text-indigo-600"
+                />
+                <span className="ml-2 text-sm font-medium text-gray-700">Same as Parent Address</span>
+              </label>
+            </div>
+            </div>
+            
+            <div>
+              <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
+                Select Gender<span className="text-red-500">*</span>
+              </label>
+              <select
+                name="gender"
+                value={formData.gender}
+                onChange={handleChange}
+                required
+                className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              >
+                <option >Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+            <div>
+              <label htmlFor="dob" className="block text-sm font-medium text-gray-700">
+                Date of Birth<span className="text-red-500">*</span>
               </label>
               <input
-                id="occupation"
-                name="occupation"
+                type="date"
+                name="dob"
+                value={formData.dob}
+                onChange={handleChange}
+                required
+                className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div>
+              <label htmlFor="birthplace" className="block text-sm font-medium text-gray-700">
+                Birthplace<span className="text-red-500">*</span>
+              </label>
+              <input
                 type="text"
-                value={matrimonialData.occupation}
+                name="birthplace"
+                value={formData.birthplace}
                 onChange={handleChange}
-                className="block w-full px-4 py-2 mt-2 text-pink-800 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                placeholder="City, Country"
                 required
+                className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
-
             <div>
-              <label className="text-pink-800 dark:text-pink-900" htmlFor="photo">
-                Photo Upload
+              <label htmlFor="height" className="block text-sm font-medium text-gray-700">
+                Height<span className="text-red-500">*</span>
               </label>
               <input
-                id="photo"
-                name="photo"
+                type="text"
+                name="height"
+                value={formData.height}
+                onChange={handleChange}
+                placeholder="5'8''"
+                required
+                className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div>
+              <label htmlFor="education" className="block text-sm font-medium text-gray-700">
+                Education<span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                name="education"
+                value={formData.education}
+                onChange={handleChange}
+                placeholder="Bachelor's Degree"
+                required
+                className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div>
+              <label htmlFor="occupation" className="block text-sm font-medium text-gray-700">
+                Occupation<span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                name="occupation"
+                value={formData.occupation}
+                onChange={handleChange}
+                placeholder="Software Engineer"
+                required
+                className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div>
+              <label htmlFor="monthlyIncome" className="block text-sm font-medium text-gray-700">
+                Monthly Income
+              </label>
+              <input
+                type="number"
+                name="monthlyIncome"
+                value={formData.monthlyIncome}
+                onChange={handleChange}
+                placeholder="5000"
+                className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div className="col-span-2">
+              <label htmlFor="aboutMe" className="block text-sm font-medium text-gray-700">
+                About Me
+              </label>
+              <textarea
+                name="aboutMe"
+                value={formData.aboutMe}
+                onChange={handleChange}
+                rows={4}
+                placeholder="Tell us about yourself..."
+                className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              ></textarea>
+            </div>
+            <div className="col-span-2">
+              <label htmlFor="photos" className="block text-sm font-medium text-gray-700">
+                Photos (up to 5 photos, less than 1MB each)<span className="text-red-500">*</span>
+              </label>
+              <input
                 type="file"
+                name="photos"
                 accept="image/*"
                 onChange={handlePhotoUpload}
-                className="block w-full px-4 py-2 mt-2 text-pink-800 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                multiple
                 required
+                className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
-
-            <div>
-              <label className="text-pink-800 dark:text-pink-900" htmlFor="income">
-                Monthly/Annually Income
-              </label>
-              <input
-                id="income"
-                name="income"
-                type="text"
-                value={matrimonialData.income}
-                onChange={handleChange}
-                className="block w-full px-4 py-2 mt-2 text-pink-800 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                required
-              />
             </div>
-
-            <div>
-              <label className="text-pink-800 dark:text-pink-900" htmlFor="category">
-                Category
-              </label>
-              <select
-                id="category"
-                name="category"
-                value={matrimonialData.category}
-                onChange={handleChange}
-                className="block w-full px-4 py-2 mt-2 text-pink-800 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                required
-              >
-                <option value="">Select Category</option>
-                <option value="Bride">Bride</option>
-                <option value="Groom">Groom</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="text-pink-800 dark:text-pink-900" htmlFor="education">
-                Education
-              </label>
-              <input
-                id="education"
-                name="education"
-                type="text"
-                value={matrimonialData.education}
-                onChange={handleChange}
-                className="block w-full px-4 py-2 mt-2 text-pink-800 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="text-pink-800 dark:text-pink-900" htmlFor="birthDate">
-                Birth Date
-              </label>
-              <select
-                id="birthDate"
-                name="birthDate"
-                value={matrimonialData.birthDate}
-                onChange={handleChange}
-                className="block w-full px-4 py-2 mt-2 text-pink-800 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                required
-              >
-                <option value="">Select Date</option>
-                {daysOptions.map((day) => (
-                  <option key={day} value={day}>
-                    {day}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label className="text-pink-800 dark:text-pink-900" htmlFor="birthMonth">
-                Birth Month
-              </label>
-              <select
-                id="birthMonth"
-                name="birthMonth"
-                value={matrimonialData.birthMonth}
-                onChange={handleChange}
-                className="block w-full px-4 py-2 mt-2 text-pink-800 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                required
-              >
-                <option value="">Select Month</option>
-                {monthsOptions.map((month, index) => (
-                  <option key={index} value={month}>
-                    {month}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label className="text-pink-800 dark:text-pink-900" htmlFor="birthYear">
-                Birth Year
-              </label>
-              <select
-                id="birthYear"
-                name="birthYear"
-                value={matrimonialData.birthYear}
-                onChange={handleChange}
-                className="block w-full px-4 py-2 mt-2 text-pink-800 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                required
-              >
-                <option value="">Select Year</option>
-                {yearsOptions.map((year) => (
-                  <option key={year} value={year}>
-                    {year}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          <div className="flex justify-end mt-6">
+          
+            <div className="col-span-2 mt-5">
             <button
               type="submit"
-              className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+              className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-pink-900 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 sm:w-auto"
+              disabled={loading}
             >
-              {isLoading ? 'Uploading...' : 'Save'}
+              {loading ? "Loading..." : "Submit"}
             </button>
           </div>
         </form>
-      </section>
-      <ToastContainer /> {/* React Toastify container */}
+      </div>
+
+      {/* Loading indicator */}
+      {loading && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-24 w-24"></div>
+        </div>
+      )}
+
+      {/* Toast notifications */}
+      <ToastContainer position="bottom-right" />
     </div>
   );
 };
 
-export default AddMatrimonial;
+export default FormComponent;

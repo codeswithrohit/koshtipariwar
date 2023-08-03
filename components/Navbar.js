@@ -75,7 +75,14 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-red-600 sticky top-2 z-50 rounded-lg">
+    <div
+  className="sticky top-2 z-50 rounded-lg"
+  style={{
+    backgroundColor: "rgba(255, 45, 85, 0.3)", // Red: rgb(255, 45, 85), Transparency: 0.3
+    backdropFilter: "blur(8px)",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)",
+  }}
+>
       <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
         <div className="relative flex items-center justify-between">
           <div className="flex items-center">

@@ -60,10 +60,10 @@ const [totalBrideGrooms, setTotalBrideGrooms] = useState(0);
           userData.push(user);
           totalUsers++;
   
-          // Check the 'Category' field to determine the count of each category
-          if (user.category === 'Bride') {
+          // Check the 'gender' field to determine the count of each gender
+          if (user.gender === 'Bride') {
             totalGrooms++;
-          } else if (user.category === 'Bride Groom') {
+          } else if (user.gender === 'Bride Groom') {
             totalBrideGrooms++;
           }
         });
@@ -100,10 +100,10 @@ const [totalBrideGrooms, setTotalBrideGrooms] = useState(0);
           const user = doc.data();
           matrimonialData.push(user);
   
-          // Check the 'Category' field to determine the count of each category
-          if (user.category === 'Bride') {
+          // Check the 'gender' field to determine the count of each gender
+          if (user.gender === 'Male') {
             totalGrooms++;
-          } else if (user.category === 'Bride Groom') {
+          } else if (user.gender === 'Female') {
             totalBrideGrooms++;
           }
         });
@@ -153,7 +153,7 @@ const [totalBrideGrooms, setTotalBrideGrooms] = useState(0);
 			</div>
 			<div className="flex items-center justify-between flex-1 p-3">
 				<p className="text-2xl font-semibold">{totalGrooms}</p>
-				<p>Total Bride</p>
+				<p>Total Groom</p>
 			</div>
 		</div>
 		<div className="flex overflow-hidden rounded-lg dark:bg-pink-900 dark:text-pink-100">
@@ -165,7 +165,7 @@ const [totalBrideGrooms, setTotalBrideGrooms] = useState(0);
 			</div>
 			<div className="flex items-center justify-between flex-1 p-3">
 				<p className="text-2xl font-semibold">{totalBrideGrooms}</p>
-				<p>Total Bride Groom</p>
+				<p>Total Bride </p>
 			</div>
 		</div>
 	

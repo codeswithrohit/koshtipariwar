@@ -96,9 +96,8 @@ const Contactus = () => {
             </div>
 
               <div class="mt-12 lg:flex lg:mt-0 lg:flex-col lg:items-center lg:w-1/2 lg:mx-10">
-                <img class="hidden object-cover mx-auto rounded-full lg:block shrink-0 w-96 h-96" src="https://images.unsplash.com/photo-1598257006458-087169a1f08d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt=""/>
-
-                <div class="grid grid-cols-1 gap-12 lg:col-span-3 sm:grid-cols-3 mt-5">
+               
+                <div class="grid grid-cols-1 gap-12 lg:col-span-3 sm:grid-cols-3">
             <div>
                 <h2 class="font-medium text-gray-800 text-pink-900">Rachit Tapre
 </h2>
