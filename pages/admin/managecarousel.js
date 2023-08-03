@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import AdminCarousel from '../../components/AdminCarousel';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -23,7 +24,7 @@ const ManageCarousel = () => {
     } else {
       fetchImageData();
     }
-  }, []);
+  }, [router]);
 
   const fetchImageData = async () => {
     try {
@@ -38,14 +39,7 @@ const ManageCarousel = () => {
     }
   };
 
-  const handleLogout = async () => {
-    // ... (rest of your logout logic)
-
-    // Clear the isAdmin status from local storage on logout
-    localStorage.removeItem('isAdmin');
-    setIsAdmin(false);
-    router.push('/admin/login');
-  };
+ 
 
   const deleteImageFromFirebase = async (imageUrlToDelete) => {
     try {

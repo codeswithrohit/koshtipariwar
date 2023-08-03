@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -6,6 +7,7 @@ import { firebase } from '../../Firebase/config';
 import 'firebase/storage';
 import Link from 'next/link';
 import AdminNav from '../../components/AdminNav';
+
 
 const AddPhotoGallery = () => {
   const router = useRouter();
@@ -19,17 +21,10 @@ const AddPhotoGallery = () => {
       // If the user is not an admin, show a loading message or redirect them to the login page
       router.push('/admin/login');
     }
-  }, []);
+  }, [router]);
   
 
-  const handleLogout = async () => {
-    // ... (rest of your logout logic)
-
-    // Clear the isAdmin status from local storage on logout
-    localStorage.removeItem('isAdmin');
-    setIsAdmin(false);
-    router.push('/admin/login');
-  };
+ 
 
   // State variables for input fields
   const [events, setLocation] = useState('');

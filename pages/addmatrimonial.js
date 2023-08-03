@@ -1,10 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { firebase } from '../Firebase/config';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/router';
 
 const FormComponent = () => {
+  const router = useRouter(); // Access the router
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -24,6 +26,25 @@ const FormComponent = () => {
     email: '',
     gender: '',
   });
+
+
+  useEffect(() => {
+    // Function to check if the user is logged in
+    const checkUserLoggedIn = () => {
+      const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+        if (!user) {
+          // If the user is not logged in, redirect to the login page
+          router.push('/login');
+        }
+      });
+
+      // Unsubscribe from the onAuthStateChanged listener when the component unmounts
+      return () => unsubscribe();
+    };
+
+    // Call the checkUserLoggedIn function when the component mounts
+    checkUserLoggedIn();
+  }, [router]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

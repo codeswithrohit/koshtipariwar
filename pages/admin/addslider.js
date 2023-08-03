@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -22,17 +23,9 @@ const AddSlider = () => {
       // If the user is not an admin, show a loading message or redirect them to the login page
       router.push('/admin/login');
     }
-  }, []);
+  }, [router]);
   
 
-  const handleLogout = async () => {
-    // ... (rest of your logout logic)
-
-    // Clear the isAdmin status from local storage on logout
-    localStorage.removeItem('isAdmin');
-    setIsAdmin(false);
-    router.push('/admin/login');
-  };
 
   // Function to handle file selection
   const handleFileSelect = (e) => {

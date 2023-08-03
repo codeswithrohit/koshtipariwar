@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from 'react';
 import { firebase } from '../../Firebase/config';
 import AdminNav from '@/components/AdminNav';
@@ -18,7 +19,7 @@ const Managematrimonial = () => {
     } else {
       setMatrimonialsData();
     }
-  }, []);
+  }, [router]);
 
   const [matrimonialsData, setMatrimonialsData] = useState([]);
 

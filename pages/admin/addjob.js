@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,7 +20,7 @@ const AddJob = () => {
       // If the user is not an admin, show a loading message or redirect them to the login page
       router.push('/admin/login');
     }
-  }, []);
+  }, [router]);
   
   const handleLogout = async () => {
     // ... (rest of your logout logic)

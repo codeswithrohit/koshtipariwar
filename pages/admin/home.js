@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router'; // Import useRouter to handle client-side navigation
@@ -20,18 +21,11 @@ const AdminHome = () => {
     } else {
       setUsersData()
     }
-  }, []);
+  }, [router]);
 
  
 
-  const handleLogout = async () => {
-    // ... (rest of your logout logic)
-
-    // Clear the isAdmin status from local storage on logout
-    localStorage.removeItem('isAdmin');
-    setIsAdmin(false);
-    router.push('/admin/login');
-  };
+ 
 
 
   const [totalUsers, setTotalUsers] = useState(0);

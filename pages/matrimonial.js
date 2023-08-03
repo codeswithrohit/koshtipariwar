@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from 'react';
 import { firebase } from '../Firebase/config';
 import Spinner from "../components/Spinner";
@@ -195,9 +196,9 @@ const Matrimonial = () => {
 
           <div className="flex flex-wrap">
   <div className="w-full md:w-1/2">
-    <h2 className="text-lg font-semibold text-gray-700 capitalize">Parent's Name</h2>
+    <h2 className="text-lg font-semibold text-gray-700 capitalize">Parent Name</h2>
     <p className="text-gray-500 mb-4">{selectedUser.parentName}</p>
-    <h2 className="text-lg font-semibold text-gray-700 capitalize">Parent's Address</h2>
+    <h2 className="text-lg font-semibold text-gray-700 capitalize">Parent Address</h2>
     <p className="text-gray-500 mb-4">{selectedUser.parentAddress}</p>
   </div>
 </div>
