@@ -37,7 +37,7 @@ const Profile = () => {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [user,router]);
 
   const fetchUserData = async (user) => {
     try {
@@ -114,7 +114,11 @@ const Profile = () => {
 
           <div className="p-4 md:p-12 text-center lg:text-left">
             {/* Image for mobile view */}
-            <div className="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center" style={{ backgroundImage: "url('https://source.unsplash.com/MP0IUfwrn0A')" }}></div>
+            <div
+  className="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center"
+  style={{ backgroundImage: `url('${userData.profileImageURL}')` }}
+></div>
+
 
             <h1 className="text-3xl font-bold pt-8 lg:pt-0">{userData.firstName} {userData.lastName}</h1>
             <div className="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-green-500 opacity-25"></div>

@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from 'react';
 import { firebase } from '../Firebase/config';
-import Spinner from "../components/Spinner";
+import Spinner from '../components/Spinner';
 import { useRouter } from 'next/router';
 
 const Matrimonial = () => {
@@ -56,11 +56,11 @@ const Matrimonial = () => {
   };
 
   const handleShowBride = () => {
-    setGender('Male');
+    setGender('Female');
   };
 
   const handleShowGroom = () => {
-    setGender('Female');
+    setGender('Male');
   };
 
   // Function to handle showing more details
@@ -87,7 +87,9 @@ const Matrimonial = () => {
     <div className="m-auto min-h-screen bg-white dark:bg-white">
       <section className="bg-white dark:bg-gray-900">
         <div className="container px-6 py-10 mx-auto">
-          <h1 className="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white">Our <span className="text-blue-500">Matrimonial</span></h1>
+          <h1 className="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white">
+            Our <span className="text-pink-900">Matrimonial</span>
+          </h1>
 
           <div className="flex items-center justify-center mt-5 mb-5">
             <div className="flex items-center p-1 border border-pink-600 dark:border-pink-400 rounded-xl">
@@ -102,7 +104,9 @@ const Matrimonial = () => {
               <button
                 onClick={handleShowBride}
                 className={`px-4 py-2 mx-4 text-sm font-medium capitalize transition-colors duration-300 md:py-3 ${
-                  gender === 'Bride' ? 'text-white bg-pink-600' : 'text-pink-600 dark:text-pink-400 hover:text-white hover:bg-pink-600'
+                  gender === 'Female'
+                    ? 'text-white bg-pink-600'
+                    : 'text-pink-600 dark:text-pink-400 hover:text-white hover:bg-pink-600'
                 } rounded-xl md:mx-8 md:px-12`}
               >
                 Bride
@@ -110,7 +114,9 @@ const Matrimonial = () => {
               <button
                 onClick={handleShowGroom}
                 className={`px-4 py-2 text-sm font-medium capitalize transition-colors duration-300 md:py-3 ${
-                  gender === 'Groom' ? 'text-white bg-pink-600' : 'text-pink-600 dark:text-pink-400 hover:text-white hover:bg-pink-600'
+                  gender === 'Male'
+                    ? 'text-white bg-pink-600'
+                    : 'text-pink-600 dark:text-pink-400 hover:text-white hover:bg-pink-600'
                 } rounded-xl md:px-12`}
               >
                 Groom
@@ -123,7 +129,10 @@ const Matrimonial = () => {
               <Spinner />
             ) : (
               usersData.map((user, idx) => (
-                <div key={idx} className="px-6 py-4 transition-colors duration-300 transform border cursor-pointer rounded-xl hover:border-transparent group hover:bg-pink-900 dark:border-gray-700 dark:hover:border-transparent">
+                <div
+                  key={idx}
+                  className="px-6 py-4 transition-colors duration-300 transform border cursor-pointer rounded-xl hover:border-transparent group hover:bg-pink-900 dark:border-gray-700 dark:hover:border-transparent"
+                >
                   <div className="flex flex-col sm:-mx-4 sm:flex-row">
                     <img
                       className="flex-shrink-0 object-cover w-24 h-24 rounded-full sm:mx-4 ring-4 ring-gray-300"
@@ -139,9 +148,29 @@ const Matrimonial = () => {
       
                     </div>
                   </div>
-                  <p class="mt-4 text-gray-500 capitalize dark:text-gray-300 group-hover:text-gray-300">{user.aboutMe}</p>
-                  <button className="mt-4 ml-40 px-4 py-2 text-sm font-medium text-white bg-pink-600 rounded-md hover:bg-pink-700" onClick={() => handleShowMoreDetails(user)}>More Details</button>
-                  {/* ... */}
+                  <div className="flex flex-wrap">
+            <div className="w-full md:w-1/2">
+              <h2 className="text-lg font-semibold text-gray-700 capitalize">Parent Name</h2>
+              <p className="text-gray-500 mb-4">{user.parentName}</p>
+            </div>
+            <div className="w-full md:w-1/2">
+              <h2 className="text-lg font-semibold text-gray-700 capitalize">Contact Number</h2>
+              <p className="text-gray-500 mb-4">{user.mobileNumber}</p>
+            </div>
+          </div>
+          <div className="flex flex-wrap">
+            <div className="w-full md:w-1/2">
+              <h2 className="text-lg font-semibold text-gray-700 capitalize"> Birth Date</h2>
+              <p className="text-gray-500 mb-4">{user.dob}</p>
+            </div>
+            
+          </div>
+                  <button
+                    className="mt-4 ml-40 px-4 py-2 text-sm font-medium text-white bg-pink-600 rounded-md hover:bg-pink-700"
+                    onClick={() => handleShowMoreDetails(user)}
+                  >
+                    More Details
+                  </button>
                 </div>
               ))
             )}
@@ -151,8 +180,8 @@ const Matrimonial = () => {
 
       {/* Render pop-up if showPopup is true */}
       {showPopup && selectedUser && (
-  <div className="fixed overflow-y-auto inset-0 flex items-center justify-center bg-black bg-white mt-24 mb:mt-48  ">
-    <div className="w-full max-w-3xl p-8 bg-white rounded-lg shadow-lg">
+  <div className="fixed overflow-y-auto inset-0 flex items-center justify-center bg-black bg-white   ">
+    <div className="w-full max-w-3xl p-8 bg-white rounded-lg shadow-lg mt-64 mb:mt-48">
       <div className="flex flex-col md:flex-row">
       <div className="md:w-1/2 grid grid-cols-2 gap-2">
       {selectedUser.photos.map((photo, index) => (
@@ -193,7 +222,7 @@ const Matrimonial = () => {
         <div className="md:w-1/2 md:ml-6">
           <h1 className="text-3xl font-semibold text-gray-700 capitalize mb-2">{selectedUser.name}</h1>
           <p className="text-gray-500 capitalize mb-4">Education: {selectedUser.education}</p>
-
+          <p className="mt-2 text-gray-500 capitalize dark:text-gray-300 group-hover:text-gray-300 font-semibold text-sm">{selectedUser.aboutMe}</p>
           <div className="flex flex-wrap">
   <div className="w-full md:w-1/2">
     <h2 className="text-lg font-semibold text-gray-700 capitalize">Parent Name</h2>
@@ -217,7 +246,7 @@ const Matrimonial = () => {
           </div>
           <div className="flex flex-wrap">
             <div className="w-full md:w-1/2">
-              <h2 className="text-lg font-semibold text-gray-700 capitalize">Email'Id</h2>
+              <h2 className="text-lg font-semibold text-gray-700 capitalize">Email</h2>
               <p className="text-gray-500 mb-4">{selectedUser.email}</p>
             </div>
             <div className="w-full md:w-1/2">
