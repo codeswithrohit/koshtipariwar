@@ -7,18 +7,19 @@ const aboutus = () => {
      <section className="py-14">
             <div className="max-w-screen-xl mx-auto md:px-8">
                 <div className="items-center gap-x-12 sm:px-4 md:px-0 lg:flex">
-                    <div className=" sm:hidden lg:block">
+                    <div className=" sm:hidden lg:block px-2">
                         <img src="https://www.bhagwanapp.in/uploads/kolapuri_mahalakshmi.jpg" className="md:max-w-lg sm:rounded-lg" alt="" />
                     </div>
                     <div className="max-w-xl px-4 space-y-3 mt-6 sm:px-0 md:mt-0 lg:max-w-2xl">
                         
-                        <p className="text-red-300 text-3xl font-semibold sm:text-4xl">
+                        <p className="text-orange-700 text-3xl font-semibold sm:text-4xl">
                         Welcome To Koshti Pariwar
                         </p>
                       
                     </div>
                   
                 </div>
+                <div className='px-2' >
                 <h1 className='text-xl font-bold mt-10 ml-15' >
                     कोष्टी समाज:
                     </h1>
@@ -142,6 +143,7 @@ const aboutus = () => {
                     <h2 className='text-sm font-semibold mt-5 '>
                     घराबाहेर निघणे बंद, दुकाने बंद, वाहतूक बंद, व्यवसाय बंद, हॉटेल, इत्यादी सर्वकाही बंद होते. अशा काळात नौजवान मुलांनी समाजातील उदारवाद्यांकडून चंदा गोळा करून किराणा माल गरीबांना घरपोहोच केला. गावागावात शहराशहरात आपल्या कोष्टी समाजात सेवा मंडळे उभी राहिली व समाज सेवा कार्य जोमाने केले. आपल्या समाजात गरीबी असल्याने समाज सेवेला अनन्यसाधारण महत्त्व प्राप्त झाले होते. समाज सेवा किती आवश्यक आहे याची प्रचिती आली व सर्व गावात सेवा मंडळे निर्माण झाली.
                     </h2>
+                    </div>
             </div>
         </section>
   </div>

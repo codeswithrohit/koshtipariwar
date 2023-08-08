@@ -44,7 +44,7 @@ const Contactus = () => {
         <div className="container px-6 py-10 mx-auto">
           <div className="lg:flex lg:items-center lg:-mx-10">
             <div className="lg:w-1/2 lg:mx-10">
-              <h1 className="text-2xl font-semibold text-gray-800 capitalize text-red-300 lg:text-3xl">Lets talk</h1>
+              <h1 className="text-2xl font-semibold  capitalize text-orange-700 lg:text-3xl">Lets talk</h1>
               <p className="mt-4 text-gray-500 dark:text-gray-400">
                 Ask us anything We are here to help.
               </p>
@@ -79,14 +79,14 @@ const Contactus = () => {
                   <textarea
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    className="block w-full h-32 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md md:h-56 dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-red-300 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                    className="block w-full h-32 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md md:h-56 dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-orange-700 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                     placeholder="Message"
                   ></textarea>
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full px-6 py-3 mt-4 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-red-300 rounded-md hover:bg-red-300 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-50"
+                  className="w-full px-6 py-3 mt-4 text-sm font-medium tracking-wide text-orange-700 capitalize transition-colors duration-300 transform bg-red-300 rounded-md hover:bg-orange-700 focus:outline-none focus:ring focus:ring-orange-700 focus:ring-opacity-50"
                 >
                   {isLoading ? 'Submitting...' : 'get in touch'}
                 </button>
@@ -119,12 +119,12 @@ const ContactCard = ({ name, phone, email }) => (
   <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
     <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-300">{name}</h2>
     <p className="mt-2 text-gray-600 dark:text-gray-400">
-      <AiOutlinePhone className="inline-block mr-2 text-red-300" />
+      <AiOutlinePhone className="inline-block mr-2 text-orange-700" />
       {phone}
     </p>
     {email && (
       <p className="mt-1 text-gray-600 dark:text-gray-400">
-        <AiOutlineMail className="inline-block mr-2 text-red-300" />
+        <AiOutlineMail className="inline-block mr-2 text-orange-700" />
         {email}
       </p>
     )}

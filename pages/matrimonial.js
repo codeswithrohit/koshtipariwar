@@ -3,22 +3,38 @@ import React, { useState, useEffect } from 'react';
 import { firebase } from '../Firebase/config';
 import Spinner from '../components/Spinner';
 import { useRouter } from 'next/router';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 const Matrimonial = () => {
   const router = useRouter(); // Access the router
   const [usersData, setUsersData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [gender, setGender] = useState('All'); // Add state for gender
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 9;
+
+  const handleShowAll = () => {
+    setGender('All');
+    setCurrentPage(1);
+  };
+
+  const handleShowBride = () => {
+    setGender('Female');
+    setCurrentPage(1);
+  };
+
+  const handleShowGroom = () => {
+    setGender('Male');
+    setCurrentPage(1);
+  };
 
   // New state to manage pop-up visibility and selected user's data
   const [showPopup, setShowPopup] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
 
   useEffect(() => {
-    // Check if the user is logged in
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        // User is logged in, fetch data from the 'matrimonials' collection
         const db = firebase.firestore();
         const usersRef = db.collection('matrimonials');
 
@@ -30,38 +46,25 @@ const Matrimonial = () => {
               userData.push({ ...doc.data(), id: doc.id });
             });
 
-            // Filter the data based on the selected gender
-            const filteredUserData = gender === 'All' ? userData : userData.filter((user) => user.gender === gender);
+            const filteredUserData =
+              gender === 'All' ? userData : userData.filter((user) => user.gender === gender);
 
             setUsersData(filteredUserData);
-            setIsLoading(false); // Set loading to false when data is fetched
+            setIsLoading(false);
           })
           .catch((error) => {
             console.error('Error getting documents: ', error);
-            setIsLoading(false); // Set loading to false even on error
+            setIsLoading(false);
           });
       } else {
-        // User is not logged in, navigate to the login page
         router.push('/login');
       }
     });
 
-    // Clean up the listener when the component unmounts
     return () => unsubscribe();
-  }, [router, gender]); // Add router and gender as dependencies to useEffect
+  }, [router, gender]);
 
-  // Function to handle showing all data
-  const handleShowAll = () => {
-    setGender('All');
-  };
-
-  const handleShowBride = () => {
-    setGender('Female');
-  };
-
-  const handleShowGroom = () => {
-    setGender('Male');
-  };
+ 
 
   // Function to handle showing more details
   const handleShowMoreDetails = (user) => {
@@ -83,15 +86,26 @@ const Matrimonial = () => {
     setShowFullImage(true);
   };
 
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentPageData = usersData.slice(startIndex, endIndex);
+
+  const handlePaginationClick = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  // Calculate total number of pages
+  const totalPages = Math.ceil(usersData.length / itemsPerPage);
+
   return (
-    <div className="m-auto min-h-screen bg-white dark:bg-white">
+    <div className="m-auto min-h-screen bg-white dark:bg-gray-900">
       <section className="bg-white dark:bg-gray-900">
         <div className="container px-6 py-10 mx-auto">
-          <h1 className="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white">
+          <h1 className="text-3xl font-semibold text-center text-gray-800 capitalize lg:text-4xl dark:text-white">
             Our <span className="text-red-300">Matrimonial</span>
           </h1>
 
-          <div className="flex items-center justify-center mt-5 mb-5">
+          <div className="flex items-center justify-center mt-5 mb-8">
             <div className="flex items-center p-1 border border-red-300 dark:border-red-300 rounded-xl">
               <button
                 onClick={handleShowAll}
@@ -194,11 +208,49 @@ const Matrimonial = () => {
         >
           More Details
         </button>
-      </div>
-    ))
-  )}
-</div>
+        </div>
+              ))
+            )}
+          </div>
 
+          <div className="flex justify-center mt-8">
+            <div className="flex space-x-2">
+              {/* Back Button */}
+              <button
+                onClick={() => handlePaginationClick(currentPage - 1)}
+                className={`px-4 py-2 text-sm text-white font-medium bg-red-300 rounded-md ${
+                  currentPage === 1 ? 'bg-red-400 cursor-not-allowed' : ''
+                }`}
+                disabled={currentPage === 1}
+              >
+                <FiChevronLeft className="inline-block mr-1" /> Previous
+              </button>
+
+              {/* Page Buttons */}
+              {Array.from({ length: totalPages }, (_, index) => (
+                <button
+                  key={index}
+                  onClick={() => handlePaginationClick(index + 1)}
+                  className={`px-4 py-2 text-sm text-white font-medium bg-red-300 rounded-md ${
+                    currentPage === index + 1 ? 'bg-red-400' : ''
+                  }`}
+                >
+                  {index + 1}
+                </button>
+              ))}
+
+              {/* Next Button */}
+              <button
+                onClick={() => handlePaginationClick(currentPage + 1)}
+                className={`px-4 py-2 text-sm text-white font-medium bg-red-300 rounded-md ${
+                  currentPage === totalPages ? 'bg-red-400 cursor-not-allowed' : ''
+                }`}
+                disabled={currentPage === totalPages}
+              >
+                Next <FiChevronRight className="inline-block ml-1" />
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 

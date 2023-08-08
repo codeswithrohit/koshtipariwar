@@ -56,35 +56,29 @@ const Index = () => {
         <link rel="icon" href="/icon.png" />
       </Head>
       <Carousel imageUrls={imageUrls} />
-      <section className="bg-white">
+      <section className="bg-white mt-10">
         <div className="container mx-auto">
           <div className="text-center">
-            <h1 className="text-2xl font-semibold text-red-300 00 capitalize lg:text-3xl dark:text-white py-5">
+            <h1 className="text-2xl font-semibold text-orange-700  capitalize lg:text-3xl dark:text-white py-5">
               Recent Events
             </h1>
           </div>
 
           <div className="grid grid-cols-1 gap-8 mt-2 lg:grid-cols-3 px-5">
             {photoData.map((data) => (
-              <Link key={data.id} href={`/gallerydetails?id=${data.id}`}>
-              <div >
-                <img
-                  className="relative z-10 object-cover w-full rounded-md h-96"
-                  src={data.singleImageUrl} // Use the image URL from the fetched data
-                  alt=""
-                />
-
-<div
-
-  className="relative z-20 max-w-lg p-6 mx-auto -mt-20 rounded-md shadow bg-red-300"
->
-  <p
-    className="font-semibold text-gray-800 hover:underline text-white text-center md:text-xl"
-  >
-    {data.events} {/* Use the heading from the fetched data */}
-  </p>
-</div>
-              </div>
+                <Link key={data.id} href={`/gallerydetails?id=${data.id}`}>
+                <div
+                  className="flex items-end overflow-hidden bg-cover rounded-lg h-96 cursor-pointer"
+                  style={{
+                    backgroundImage: `url('${data.singleImageUrl}')`,
+                  }}
+                >
+                  <div className="w-full px-8 py-4 overflow-hidden rounded-b-lg backdrop-blur-sm bg-white/60 dark:bg-gray-800/60">
+                    <h2 className="mt-4 text-2xl text-center font-semibold text-orange-700 capitalize dark:text-white">
+                      {data.events}
+                    </h2>
+                  </div>
+                </div>
               </Link>
             ))}
           </div>

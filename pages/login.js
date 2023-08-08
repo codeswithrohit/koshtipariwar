@@ -51,13 +51,13 @@ const Login = () => {
 
   return (
     <div className='m-auto min-h-screen bg-white dark:bg-white'>
-      <section class="bg-white dark:bg-gray-900 ">
+      <section class="bg-white dark:bg-orange-700 ">
         <div class="container px-6 py-24 mx-auto lg:py-32">
           <div class="lg:flex">
             <div class="lg:w-1/2">
               <img class=" w-18 h-12 mx-auto rounded-lg" src="http://koshtipariwar.com/wp-content/uploads/koshti_logo3.jpg" alt="koshtipariwar" />
-              <h1 class="mt-4 text-gray-600 dark:text-gray-300 md:text-lg">Welcome </h1>
-              <h1 class="mt-4 text-2xl font-medium text-gray-800 capitalize lg:text-3xl dark:text-white">
+              <h1 class="mt-4 text-orange-700 dark:text-orange-700 md:text-lg">Welcome </h1>
+              <h1 class="mt-4 text-2xl text-orange-700 font-medium text-orange-700 capitalize lg:text-3xl dark:text-white">
                 Login to your account
               </h1>
             </div>
@@ -65,7 +65,7 @@ const Login = () => {
               <form class="w-full lg:max-w-xl" onSubmit={handleFormSubmit}>
                 <div class="relative flex items-center">
                   <span class="absolute">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-3 text-orange-700 dark:text-orange-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                       {/* ... (your SVG path) ... */}
                     </svg>
                   </span>
@@ -75,12 +75,12 @@ const Login = () => {
                     value={formData.email}
                     onChange={handleFormChange}
                     placeholder="Email address"
-                    class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-red-300 dark:focus:border-red-300 focus:ring-red-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                    class="block w-full py-3 text-orange-700 bg-white border rounded-lg px-11 dark:bg-orange-700 dark:text-orange-700 dark:border-orange-700 focus:border-red-300 dark:focus:border-red-300 focus:ring-red-300 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
                 <div class="relative flex items-center mt-4">
                   <span class="absolute">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-3 text-orange-700 dark:text-orange-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                       {/* ... (your SVG path) ... */}
                     </svg>
                   </span>
@@ -90,7 +90,7 @@ const Login = () => {
                     value={formData.password}
                     onChange={handleFormChange}
                     placeholder="Password"
-                    class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-red-300 dark:focus:border-red-300 focus:ring-red-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                    class="block w-full px-10 py-3 text-orange-700 bg-white border rounded-lg dark:bg-orange-700 dark:text-orange-700 dark:border-orange-700 focus:border-red-300 dark:focus:border-red-300 focus:ring-red-300 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
                 <div class="mt-8 md:flex md:items-center">
@@ -101,7 +101,7 @@ const Login = () => {
                   >
                     {loading ? 'Signing in...' : 'Sign in'}
                   </button>
-                  <Link href="/forgotpassword" class="inline-block mt-4 text-center text-red-300 md:mt-0 md:mx-6 hover:underline dark:text-red-300">
+                  <Link href="/forgotpassword" class="inline-block mt-4 text-center text-orange-700 md:mt-0 md:mx-6 hover:underline dark:text-orange-700">
                     Forgot your password?
                   </Link>
                 </div>

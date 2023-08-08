@@ -37,15 +37,16 @@ const Carousel = ({ imageUrls }) => {
 
   return (
     <div className='max-w-[1640px] mx-auto p-2 '>
-      <div ref={slideRef} className='max-h-[550px] relative '>
-        <img
-          className='w-full max-h-[550px] object-cover rounded-lg '
-          src={imageUrls[currentIndex]}
-          alt="/"
-        />
+      <div ref={slideRef} className='max-h-[450px] relative '>
+      <img className="px-20"
+  style={{ height: "510px",width:"100%" }}
+  src={imageUrls[currentIndex]}
+  alt="/"
+/>
+
         <div className='absolute inset-y-0 left-0 flex justify-center items-center'>
           <button
-            className='bg-black text-white p-2 rounded-full bg-opacity-50 cursor-pointer hover:bg-opacity-100 transition'
+            className='bg-red-300 text-white p-2 rounded-full bg-opacity-50 cursor-pointer hover:bg-opacity-100 transition'
             onClick={handleOnPrevClick}
           >
             <AiOutlineArrowLeft size={30} />
@@ -53,7 +54,7 @@ const Carousel = ({ imageUrls }) => {
         </div>
         <div className='absolute inset-y-0 right-0 flex justify-center items-center'>
           <button
-            className='bg-black text-white p-2 rounded-full bg-opacity-50 cursor-pointer hover:bg-opacity-100 transition'
+            className='bg-red-300 text-white p-2 rounded-full bg-opacity-50 cursor-pointer hover:bg-opacity-100 transition'
             onClick={handleOnNextClick}
           >
             <AiOutlineArrowRight size={30} />
