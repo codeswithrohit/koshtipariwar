@@ -75,7 +75,7 @@ const Login = () => {
                     value={formData.email}
                     onChange={handleFormChange}
                     placeholder="Email address"
-                    class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-pink-400 dark:focus:border-pink-300 focus:ring-pink-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                    class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-red-300 dark:focus:border-red-300 focus:ring-red-300 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
                 <div class="relative flex items-center mt-4">
@@ -90,18 +90,18 @@ const Login = () => {
                     value={formData.password}
                     onChange={handleFormChange}
                     placeholder="Password"
-                    class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-pink-400 dark:focus:border-pink-300 focus:ring-pink-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                    class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-red-300 dark:focus:border-red-300 focus:ring-red-300 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
                 <div class="mt-8 md:flex md:items-center">
                   <button
                     type="submit"
-                    class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-pink-500 rounded-lg md:w-1/2 hover:bg-pink-400 focus:outline-none focus:ring focus:ring-pink-300 focus:ring-opacity-50"
+                    class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-red-300 rounded-lg md:w-1/2 hover:bg-red-500 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-50"
                     disabled={loading} // Disable the button while loading is true
                   >
                     {loading ? 'Signing in...' : 'Sign in'}
                   </button>
-                  <Link href="/forgotpassword" class="inline-block mt-4 text-center text-pink-500 md:mt-0 md:mx-6 hover:underline dark:text-pink-400">
+                  <Link href="/forgotpassword" class="inline-block mt-4 text-center text-red-300 md:mt-0 md:mx-6 hover:underline dark:text-red-300">
                     Forgot your password?
                   </Link>
                 </div>

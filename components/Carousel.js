@@ -7,10 +7,6 @@ const Carousel = ({ imageUrls }) => {
   const slideRef = useRef();
   let count = 0;
 
-  const removeAnimation = () => {
-    slideRef.current?.classList.remove("fade-anim");
-  };
-
   const handleOnNextClick = () => {
     count = (count + 1) % imageUrls.length;
     setCurrentIndex(count);
@@ -40,32 +36,29 @@ const Carousel = ({ imageUrls }) => {
   }
 
   return (
-    <div className="w-full select-none relative rounded-lg overflow-hidden ">
-      <div className="border-red-300 border-4 rounded-lg" ref={slideRef}>
-        <div className="aspect-w-16 aspect-h-14">
-          <img
-            src={imageUrls[currentIndex]}
-            alt=""
-            style={{
-              width: "1500px",
-              height: "550px",
-            }}
-          />
+    <div className='max-w-[1640px] mx-auto p-2 '>
+      <div ref={slideRef} className='max-h-[550px] relative '>
+        <img
+          className='w-full max-h-[550px] object-cover rounded-lg '
+          src={imageUrls[currentIndex]}
+          alt="/"
+        />
+        <div className='absolute inset-y-0 left-0 flex justify-center items-center'>
+          <button
+            className='bg-black text-white p-2 rounded-full bg-opacity-50 cursor-pointer hover:bg-opacity-100 transition'
+            onClick={handleOnPrevClick}
+          >
+            <AiOutlineArrowLeft size={30} />
+          </button>
         </div>
-      </div>
-      <div className="absolute w-full top-1/2 transform -translate-y-1/2 px-3 flex justify-between items-center">
-        <button
-          className="bg-black text-white p-1 rounded-full bg-opacity-50 cursor-pointer hover:bg-opacity-100 transition"
-          onClick={handleOnPrevClick}
-        >
-          <AiOutlineArrowLeft size={30} />
-        </button>
-        <button
-          className="bg-black text-white p-1 rounded-full bg-opacity-50 cursor-pointer hover:bg-opacity-100 transition"
-          onClick={handleOnNextClick}
-        >
-          <AiOutlineArrowRight size={30} />
-        </button>
+        <div className='absolute inset-y-0 right-0 flex justify-center items-center'>
+          <button
+            className='bg-black text-white p-2 rounded-full bg-opacity-50 cursor-pointer hover:bg-opacity-100 transition'
+            onClick={handleOnNextClick}
+          >
+            <AiOutlineArrowRight size={30} />
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -44,9 +44,9 @@ const Contactus = () => {
         <div className="container px-6 py-10 mx-auto">
           <div className="lg:flex lg:items-center lg:-mx-10">
             <div className="lg:w-1/2 lg:mx-10">
-              <h1 className="text-2xl font-semibold text-gray-800 capitalize text-red-300 lg:text-3xl">Let’s talk</h1>
+              <h1 className="text-2xl font-semibold text-gray-800 capitalize text-red-300 lg:text-3xl">Lets talk</h1>
               <p className="mt-4 text-gray-500 dark:text-gray-400">
-                Ask us anything! We're here to help.
+                Ask us anything We are here to help.
               </p>
 
               <form className="mt-12" onSubmit={handleSubmit}>

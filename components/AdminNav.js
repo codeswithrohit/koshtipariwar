@@ -125,11 +125,7 @@ const AdminNav = () => {
           </button>
           {isMenuOpen && (
             <div className="absolute top-0 left-0 w-full">
-              <div className="p-5  border rounded shadow-sm"  style={{
-    backgroundColor: "rgba(300, 100, 100, 0.3)", // Light Blue: rgb(176, 224, 230), Transparency: 0.3
-    backdropFilter: "blur(8px)",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)",
-  }}>
+              <div className="p-5  border rounded shadow-sm bg-red-200"  >
                 <div className="flex items-center justify-between mb-4">
                   <div>
                     <Link
