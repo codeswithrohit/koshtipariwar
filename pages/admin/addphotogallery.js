@@ -114,10 +114,10 @@ const AddPhotoGallery = () => {
 
         <div>
           <h1 className="mb-1 font-bold text-3xl flex gap-1 items-baseline font-mono">
-            Upload Events<span className="text-sm text-pink-900">form showcase</span>
+            Upload Events<span className="text-sm text-red-300">form showcase</span>
           </h1>
           <form onSubmit={handleSubmit}>
-            <div className="grid max-w-3xl gap-2 py-10 px-8 sm:grid-cols-2 bg-white rounded-md border-t-4 border-pink-900">
+            <div className="grid max-w-3xl gap-2 py-10 px-8 sm:grid-cols-2 bg-white rounded-md border-t-4 border-red-300">
               {/* Input field for events */}
               <div className="grid">
                 <div className="bg-white flex min-h-[60px] flex-col-reverse justify-center rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:shadow-inner">
@@ -174,7 +174,7 @@ const AddPhotoGallery = () => {
               </div>
               <button
                 type="submit"
-                className="mt-4 bg-pink-900 text-white py-2 px-6 rounded-md hover:bg-pink-600"
+                className="mt-4 bg-red-300 text-white py-2 px-6 rounded-md hover:bg-red-300"
                 disabled={isUploading} // Disable the button during loading
               >
                 {isUploading ? 'Uploading...' : 'Submit'}

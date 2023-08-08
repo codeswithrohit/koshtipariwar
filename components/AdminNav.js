@@ -22,7 +22,7 @@ const AdminNav = () => {
 <div
   className="sticky top-2 z-50 rounded-lg"
   style={{
-    backgroundColor: "rgba(176, 224, 230, 0.3)", // Light Blue: rgb(176, 224, 230), Transparency: 0.3
+    backgroundColor: "rgba(300, 100, 100,0.3)", // Light Blue: rgb(176, 224, 230), Transparency: 0.3
     backdropFilter: "blur(8px)",
     boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)",
   }}
@@ -126,7 +126,7 @@ const AdminNav = () => {
           {isMenuOpen && (
             <div className="absolute top-0 left-0 w-full">
               <div className="p-5  border rounded shadow-sm"  style={{
-    backgroundColor: "rgba(176, 224, 230, 0.3)", // Light Blue: rgb(176, 224, 230), Transparency: 0.3
+    backgroundColor: "rgba(300, 100, 100, 0.3)", // Light Blue: rgb(176, 224, 230), Transparency: 0.3
     backdropFilter: "blur(8px)",
     boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)",
   }}>

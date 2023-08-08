@@ -1,8 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { firebase } from '../Firebase/config';
+import { AiOutlinePhone, AiOutlineMail } from 'react-icons/ai';
 
 const Contactus = () => {
   const [fullName, setFullName] = useState('');
@@ -40,15 +40,13 @@ const Contactus = () => {
 
   return (
     <div className="m-auto min-h-screen bg-white dark:bg-white">
-      <section className=" ">
+      <section className="">
         <div className="container px-6 py-10 mx-auto">
           <div className="lg:flex lg:items-center lg:-mx-10">
             <div className="lg:w-1/2 lg:mx-10">
-              <h1 className="text-2xl font-semibold text-gray-800 capitalize text-pink-900 lg:text-3xl">Let’s talk</h1>
-
+              <h1 className="text-2xl font-semibold text-gray-800 capitalize text-red-300 lg:text-3xl">Let’s talk</h1>
               <p className="mt-4 text-gray-500 dark:text-gray-400">
-                Ask us everything and we would love
-                to hear from you
+                Ask us anything! We're here to help.
               </p>
 
               <form className="mt-12" onSubmit={handleSubmit}>
@@ -81,54 +79,56 @@ const Contactus = () => {
                   <textarea
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    className="block w-full h-32 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md md:h-56 dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-pink-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                    className="block w-full h-32 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md md:h-56 dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-red-300 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                     placeholder="Message"
                   ></textarea>
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full px-6 py-3 mt-4 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-pink-900 rounded-md hover:bg-pink-900 focus:outline-none focus:ring focus:ring-pink-400 focus:ring-opacity-50"
+                  className="w-full px-6 py-3 mt-4 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-red-300 rounded-md hover:bg-red-300 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-50"
                 >
                   {isLoading ? 'Submitting...' : 'get in touch'}
                 </button>
               </form>
             </div>
 
-              <div class="mt-12 lg:flex lg:mt-0 lg:flex-col lg:items-center lg:w-1/2 lg:mx-10">
-               
-                <div class="grid grid-cols-1 gap-12 lg:col-span-3 sm:grid-cols-3">
-            <div>
-                <h2 class="font-medium text-gray-800 text-pink-900">Rachit Tapre
-</h2>
-                <p class="mt-2 text-gray-500 dark:text-pink-400">8149034846 <br/> support@koshtipariwar.com</p>
-            </div>
-
-            <div>
-                <h2 class="font-medium text-gray-800 text-pink-900">Nikhil Yokar
-</h2>
-                <p class="mt-2 text-gray-500 dark:text-pink-400">9881947527 <br/> info@koshtipariwar.com</p>
-            </div>
-
-            <div>
-                <h2 class="font-medium text-gray-800 text-pink-900">Ratnakar Dhotre
-</h2>
-                <p class="mt-2 text-gray-500 dark:text-pink-400">9850335514</p>
-            </div>
-
-          
-
-         
+            <div className="grid grid-cols-1 gap-6 mt-6 lg:mt-0 lg:grid-cols-2">
+            <ContactCard
+              name="Rachit Tapre"
+              phone="8149034846"
+              email="support@koshtipariwar.com"
+            />
+            <ContactCard
+              name="Nikhil Yokar"
+              phone="9881947527"
+              email="info@koshtipariwar.com"
+            />
+            <ContactCard name="Ratnakar Dhotre" phone="9850335514" />
+          </div>
         </div>
-
-               
-            </div>         
-             </div>
         </div>
       </section>
       <ToastContainer position="top-right" autoClose={5000} hideProgressBar />
     </div>
+    
   );
 };
+
+const ContactCard = ({ name, phone, email }) => (
+  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+    <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-300">{name}</h2>
+    <p className="mt-2 text-gray-600 dark:text-gray-400">
+      <AiOutlinePhone className="inline-block mr-2 text-red-300" />
+      {phone}
+    </p>
+    {email && (
+      <p className="mt-1 text-gray-600 dark:text-gray-400">
+        <AiOutlineMail className="inline-block mr-2 text-red-300" />
+        {email}
+      </p>
+    )}
+  </div>
+);
 
 export default Contactus;

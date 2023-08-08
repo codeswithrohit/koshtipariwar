@@ -80,6 +80,10 @@ const ManageUsers = () => {
 
       // Display a success toast
       toast.success('User deleted successfully');
+
+      // Refresh the user data after deletion
+      const updatedUsers = usersData.filter((user) => user.id !== userId);
+      setUsersData(updatedUsers);
     } catch (error) {
       console.error('Error deleting user:', error);
       // Display an error toast

@@ -40,28 +40,17 @@ const Carousel = ({ imageUrls }) => {
   }
 
   return (
-    <div
-      className="w-full select-none relative rounded-lg overflow-hidden" // Removed bg-white class
-    >
-      {/* Added pink border here */}
-      <div
-        className="border-pink-500 border-4 rounded-lg"
-        ref={slideRef}
-      >
-        <div className="aspect-w-16 aspect-h-9">
+    <div className="w-full select-none relative rounded-lg overflow-hidden ">
+      <div className="border-red-300 border-4 rounded-lg" ref={slideRef}>
+        <div className="aspect-w-16 aspect-h-14">
           <img
             src={imageUrls[currentIndex]}
             alt=""
             style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover", // This property ensures the image is best-fit inside the container without stretching
-              maxWidth: "1500px",
-              maxHeight: "420px",
+              width: "1500px",
+              height: "550px",
             }}
           />
-          {/* Overlay Content */}
-          {/* End Overlay Content */}
         </div>
       </div>
       <div className="absolute w-full top-1/2 transform -translate-y-1/2 px-3 flex justify-between items-center">
@@ -83,5 +72,3 @@ const Carousel = ({ imageUrls }) => {
 };
 
 export default Carousel;
-
-

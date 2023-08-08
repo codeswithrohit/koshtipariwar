@@ -16,6 +16,7 @@ const FormComponent = () => {
     yourAddress: '',
     dob: '',
     birthplace: '',
+    birthtime:'',
     height: '',
     education: '',
     occupation: '',
@@ -115,6 +116,7 @@ const FormComponent = () => {
         yourAddress: '',
         dob: '',
         birthplace: '',
+        birthtime:'',
         height: '',
         education: '',
         occupation: '',
@@ -182,7 +184,7 @@ const FormComponent = () => {
             </div>
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Your Email ID<span className="text-red-500">*</span>
+                 Email ID<span className="text-red-500">*</span>
               </label>
               <input
                 type="email"
@@ -210,7 +212,7 @@ const FormComponent = () => {
             </div>
             <div>
               <label htmlFor="yourAddress" className="block text-sm font-medium text-gray-700">
-                Your Address<span className="text-red-500">*</span>
+                 Address<span className="text-red-500">*</span>
               </label>
               <textarea
                 name="yourAddress"
@@ -260,6 +262,20 @@ const FormComponent = () => {
                 name="dob"
                 value={formData.dob}
                 onChange={handleChange}
+                required
+                className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div>
+              <label htmlFor="birthtime" className="block text-sm font-medium text-gray-700">
+                Birth Time<span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                name="birthtime"
+                value={formData.birthtime}
+                onChange={handleChange}
+                placeholder="4:00 AM"
                 required
                 className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
@@ -365,7 +381,7 @@ const FormComponent = () => {
             <div className="col-span-2 mt-5">
             <button
               type="submit"
-              className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-pink-900 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 sm:w-auto"
+              className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-red-300 hover:bg-red-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-300 sm:w-auto"
               disabled={loading}
             >
               {loading ? "Loading..." : "Submit"}

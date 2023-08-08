@@ -40,13 +40,13 @@ const Jobs = () => {
              
 
               <div className="mt-2">
-                <a href="#" className="text-xl font-bold text-pink-700 dark:text-white hover:text-pink-600 dark:hover:text-pink-200 hover:underline" tabIndex="0" role="link">
+                <a href="#" className="text-xl font-bold text-red-300 dark:text-white hover:text-red-300 dark:hover:text-red-300 hover:underline" tabIndex="0" role="link">
                   {job.title}
                 </a>
-                <p className="mt-2 text-pink-600 dark:text-pink-300">{job.description}</p>
+                <p className="mt-2 text-red-300 dark:text-red-300">{job.description}</p>
               </div>
               <div className="flex items-center justify-between mt-5 ml-96">
-                <a className="px-3 py-1 text-sm font-bold text-pink-100 transition-colors duration-300 transform bg-pink-600 rounded cursor-pointer hover:bg-pink-500" tabIndex="0" role="button">
+                <a className="px-3 py-1 text-sm font-bold text-white transition-colors duration-300 transform bg-red-300 rounded cursor-pointer hover:bg-red-300" tabIndex="0" role="button">
                   ₹ {job.salary}
                 </a>
               </div>

@@ -59,7 +59,7 @@ const Index = () => {
       <section className="bg-white">
         <div className="container mx-auto">
           <div className="text-center">
-            <h1 className="text-2xl font-semibold text-pink-900 capitalize lg:text-3xl dark:text-white py-5">
+            <h1 className="text-2xl font-semibold text-red-300 00 capitalize lg:text-3xl dark:text-white py-5">
               Recent Events
             </h1>
           </div>
@@ -74,16 +74,16 @@ const Index = () => {
                   alt=""
                 />
 
-                <div className="relative z-20 max-w-lg p-6 mx-auto -mt-20 bg-white rounded-md shadow dark:bg-gray-900">
-                  <p
-                 
-                    className="font-semibold text-gray-800 hover:underline text-pink-900 text-center md:text-xl"
-                  >
-                   {data.events} {/* Use the heading from the fetched data */}
-                  </p>
+<div
 
-                 
-                </div>
+  className="relative z-20 max-w-lg p-6 mx-auto -mt-20 rounded-md shadow bg-red-300"
+>
+  <p
+    className="font-semibold text-gray-800 hover:underline text-white text-center md:text-xl"
+  >
+    {data.events} {/* Use the heading from the fetched data */}
+  </p>
+</div>
               </div>
               </Link>
             ))}

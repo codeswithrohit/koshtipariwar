@@ -123,19 +123,19 @@ const Profile = () => {
             <h1 className="text-3xl font-bold pt-8 lg:pt-0">{userData.firstName} {userData.lastName}</h1>
             <div className="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-green-500 opacity-25"></div>
             <p className="pt-4 text-base font-bold flex items-center justify-center lg:justify-start">
-              <AiOutlineMail className="h-12 w-12 fill-current text-pink-900 pr-4" /> {userData.email}
+              <AiOutlineMail className="h-12 w-12 fill-current text-red-300 pr-4" /> {userData.email}
             </p>
             <p className="pt-4 text-base font-bold flex items-center justify-center lg:justify-start">
-              <FiPhoneCall className="h-12 w-12 fill-current text-pink-900 pr-4" /> {userData.phoneNumber}
+              <FiPhoneCall className="h-12 w-12 fill-current text-red-300 pr-4" /> {userData.phoneNumber}
             </p>
             <p className="pt-4 text-base font-bold flex items-center justify-center lg:justify-start">
-              <FcCalendar className="h-12 w-12 fill-current text-pink-900 pr-4" /> {userData.birthDate}/{userData.birthMonth}/{userData.birthYear}
+              <FcCalendar className="h-12 w-12 fill-current text-red-300 pr-4" /> {userData.birthDate}/{userData.birthMonth}/{userData.birthYear}
             </p>
-            <button className="mt-4 mr-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleAddMatrimonial}>
+            <button className="mt-4 mr-5 bg-red-300 hover:bg-red-300 text-white font-bold py-2 px-4 rounded" onClick={handleAddMatrimonial}>
         Add Matrimonial
       </button>
 
-            <button className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => setShowChangePassword(true)}>
+            <button className="mt-4 bg-red-300 hover:bg-red-300 text-white font-bold py-2 px-4 rounded" onClick={() => setShowChangePassword(true)}>
               Change Password
             </button>
           </div>
@@ -181,7 +181,7 @@ const Profile = () => {
               className="w-full px-4 py-2 border rounded mb-4"
             />
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="bg-red-300 hover:bg-red-300 text-white font-bold py-2 px-4 rounded"
               onClick={handlePasswordChange}
             >
               Update Password

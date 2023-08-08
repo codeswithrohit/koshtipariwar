@@ -42,7 +42,7 @@ const Login = () => {
       setLoading(false); // Set loading to false after successful login
     } catch (error) {
       // Show error toast notification
-      toast.error('Error signing in: ' + error.message, {
+      toast.error('Email and Password are incorrect ', {
         position: toast.POSITION.TOP_RIGHT,
       });
       setLoading(false); // Set loading to false after encountering an error
@@ -56,7 +56,7 @@ const Login = () => {
           <div class="lg:flex">
             <div class="lg:w-1/2">
               <img class=" w-18 h-12 mx-auto rounded-lg" src="http://koshtipariwar.com/wp-content/uploads/koshti_logo3.jpg" alt="koshtipariwar" />
-              <h1 class="mt-4 text-gray-600 dark:text-gray-300 md:text-lg">Welcome back</h1>
+              <h1 class="mt-4 text-gray-600 dark:text-gray-300 md:text-lg">Welcome </h1>
               <h1 class="mt-4 text-2xl font-medium text-gray-800 capitalize lg:text-3xl dark:text-white">
                 Login to your account
               </h1>

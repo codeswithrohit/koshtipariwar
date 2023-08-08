@@ -78,10 +78,10 @@ const AddJob = () => {
       <div className="m-auto min-h-screen bg-white dark:bg-white w-full flex items-center justify-center ">
         <div>
           <h1 className="mb-1 font-bold text-3xl flex gap-1 items-baseline font-mono">
-            Upload jobs<span className="text-sm text-pink-900">form showcase</span>
+            Upload jobs<span className="text-sm text-red-300">form showcase</span>
           </h1>
           <form onSubmit={handleSubmit}>
-            <div className="grid max-w-3xl gap-2 py-10 px-8 sm:grid-cols-2 bg-white rounded-md border-t-4 border-pink-900">
+            <div className="grid max-w-3xl gap-2 py-10 px-8 sm:grid-cols-2 bg-white rounded-md border-t-4 border-red-300">
               {/* Input field for title */}
               <div className="grid">
                 <div className="bg-white flex min-h-[60px] flex-col-reverse justify-center rounded-md border border-gray-300 px-3 py-2 shadow-sm focus-within:shadow-inner">
@@ -143,7 +143,7 @@ const AddJob = () => {
               <div className="col-span-2">
                 <button
                   type="submit"
-                  className="w-full mt-4 bg-pink-900 text-white py-2 px-6 rounded-md hover:bg-pink-600"
+                  className="w-full mt-4 bg-red-300 text-white py-2 px-6 rounded-md hover:bg-red-300"
                   disabled={isUploading} // Disable the button during loading
                 >
                   {isUploading ? 'Uploading...' : 'Submit'}

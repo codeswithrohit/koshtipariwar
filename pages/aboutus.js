@@ -12,7 +12,7 @@ const aboutus = () => {
                     </div>
                     <div className="max-w-xl px-4 space-y-3 mt-6 sm:px-0 md:mt-0 lg:max-w-2xl">
                         
-                        <p className="text-pink-900 text-3xl font-semibold sm:text-4xl">
+                        <p className="text-red-300 text-3xl font-semibold sm:text-4xl">
                         Welcome To Koshti Pariwar
                         </p>
                       

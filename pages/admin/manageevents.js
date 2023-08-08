@@ -83,7 +83,7 @@ const ManageEvents = () => {
                     }}
                   >
                     <div className="w-full px-8 py-4 overflow-hidden rounded-b-lg backdrop-blur-sm bg-white/60 dark:bg-gray-800/60">
-                      <h2 className="mt-4 text-xl font-semibold text-pink-900 capitalize dark:text-white">
+                      <h2 className="mt-4 text-xl font-semibold text-red-300 capitalize dark:text-white">
                         {data.events}
                       </h2>
                     </div>

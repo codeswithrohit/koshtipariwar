@@ -4,8 +4,10 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { firebase } from '../Firebase/config';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/router';
 
 const Signup = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     username: '',
     firstName: '',
@@ -42,17 +44,17 @@ const Signup = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
+  
     // Check if any required field is empty
     for (const field in formData) {
-      if (!formData[field]) {
+      if (field !== 'profileImage' && !formData[field]) {
         toast.error('All fields are required.', {
           position: toast.POSITION.TOP_RIGHT,
         });
         return;
       }
     }
-
+  
     // Check if passwords match
     if (formData.password !== formData.confirmPassword) {
       toast.error('Passwords do not match.', {
@@ -60,15 +62,23 @@ const Signup = () => {
       });
       return;
     }
-
+  
+    // Check if password is at least 6 characters long
+    if (formData.password.length < 6) {
+      toast.error('Password must be at least 6 characters long.', {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      return;
+    }
+  
     setIsLoading(true);
-
+  
     try {
       const { email, password, username, firstName, lastName, phoneNumber, birthDate, birthMonth, birthYear } = formData;
-
+  
       // Create a user with email and password
       await createUserWithEmailAndPassword(firebase.auth(), email, password);
-
+  
       // Upload profile image to Firebase Storage if selected
       if (formData.profileImage) {
         const storageRef = firebase.storage().ref();
@@ -77,7 +87,7 @@ const Signup = () => {
         const downloadURL = await imageRef.getDownloadURL();
         formData.profileImage = downloadURL;
       }
-
+  
       // Store additional user data in Firestore, including profile image URL if selected
       const db = firebase.firestore();
       await db.collection('Users').doc(email).set({
@@ -91,14 +101,14 @@ const Signup = () => {
         birthYear,
         profileImageURL: formData.profileImage, // Store profile image URL
       });
-
+  
       setIsLoading(false);
-
+  
       // Show success toast notification
       toast.success('Your account has been created.', {
         position: toast.POSITION.TOP_RIGHT,
       });
-
+  
       // Clear the form data
       setFormData({
         username: '',
@@ -113,15 +123,23 @@ const Signup = () => {
         birthYear: '',
         profileImage: null, // Reset profile image selection
       });
+  
+      router.push('/login');
     } catch (error) {
       setIsLoading(false);
-
-      // Show error toast notification
-      toast.error('Error signing up: ' + error.message, {
-        position: toast.POSITION.TOP_RIGHT,
-      });
+  
+      if (error.code === 'auth/email-already-in-use') {
+        toast.error('Email already exists.', {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      } else {
+        toast.error('Error signing up: ' + error.message, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }
     }
   };
+  
 
 
   const daysOptions = Array.from({ length: 31 }, (_, index) => index + 1);
@@ -141,23 +159,23 @@ const Signup = () => {
           <div
             class="hidden bg-cover lg:block lg:w-2/5"
             style={{
-              backgroundImage: "url('https://images.unsplash.com/photo-1494621930069-4fd4b2e24a11?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=715&q=80')",
+              backgroundImage: "url('https://5.imimg.com/data5/SELLER/Default/2023/6/317464678/FX/UF/JH/8511744/12-by-18-1-foam-4--500x500.jpg')",
             }}
           ></div>
 
           <div class="flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5">
             <div class="w-full">
-              <h1 class="text-2xl font-semibold tracking-wider text-pink-800 capitalize dark:text-white">
+              <h1 class="text-2xl font-semibold tracking-wider text-red-300 capitalize dark:text-white">
                 Get your create account now.
               </h1>
 
-              <p class="mt-4 text-pink-500 dark:text-pink-400">
+              <p class="mt-4 text-red-300 dark:text-red-300">
                 Let’s get you all set up so you can verify your personal account and begin setting up your profile.
               </p>
 
               <form class="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2" onSubmit={handleFormSubmit}>
                 <div>
-                  <label class="block mb-2 text-sm text-pink-600 dark:text-pink-200">User Name</label>
+                  <label class="block mb-2 text-sm text-red-300 dark:text-red-300">User Name</label>
                   <input
                     type="text"
                     name="username"
@@ -165,64 +183,67 @@ const Signup = () => {
                     onChange={handleFormChange}
                     required
                     placeholder="John@123"
-                    class="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
-                  />
-                </div>
-                <div>
-                  <label class="block mb-2 text-sm text-pink-600 dark:text-pink-200">First Name</label>
-                  <input
-                    type="text"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleFormChange}
-                    required
-                    placeholder="John"
-                    class="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                    class="block w-full px-5 py-3 mt-2 text-red-300 placeholder-red-300 bg-white border border-red-300 rounded-lg dark:placeholder-red-300 dark:bg-red-300 dark:text-red-300 dark:border-red-300 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
 
                 <div>
-                  <label class="block mb-2 text-sm text-pink-600 dark:text-pink-200">Last name</label>
-                  <input
-                    type="text"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleFormChange}
-                    required
-                    placeholder="Snow"
-                    class="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
-                  />
-                </div>
-
-                <div>
-                  <label class="block mb-2 text-sm text-pink-600 dark:text-pink-200">Phone number</label>
-                  <input
-                    type="text"
-                    name="phoneNumber"
-                    value={formData.phoneNumber}
-                    onChange={handleFormChange}
-                    required
-                    placeholder="XXX-XX-XXXX-XXX"
-                    class="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
-                  />
-                </div>
-
-                <div>
-                  <label class="block mb-2 text-sm text-pink-600 dark:text-pink-200">Email address</label>
+                  <label class="block mb-2 text-sm text-red-300 dark:text-red-300">Email address</label>
                   <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleFormChange}
                     required
-                    placeholder="johnsnow@example.com"
-                    class="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                    placeholder="example@example.com"
+                    class="block w-full px-5 py-3 mt-2 text-red-300 placeholder-red-300 bg-white border border-red-300 rounded-lg dark:placeholder-red-300 dark:bg-red-300 dark:text-red-300 dark:border-red-300 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
                 
 
                 <div>
-                  <label class="block mb-2 text-sm text-pink-600 dark:text-pink-200">Password</label>
+                  <label class="block mb-2 text-sm text-red-300 dark:text-red-300">First Name</label>
+                  <input
+                    type="text"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleFormChange}
+                    required
+                    placeholder="first name"
+                    class="block w-full px-5 py-3 mt-2 text-red-300 placeholder-red-300 bg-white border border-red-300 rounded-lg dark:placeholder-red-300 dark:bg-red-300 dark:text-red-300 dark:border-red-300 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                  />
+                </div>
+
+                <div>
+                  <label class="block mb-2 text-sm text-red-300 dark:text-red-300">Last name</label>
+                  <input
+                    type="text"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleFormChange}
+                    required
+                    placeholder="last name"
+                    class="block w-full px-5 py-3 mt-2 text-red-300 placeholder-red-300 bg-white border border-red-300 rounded-lg dark:placeholder-red-300 dark:bg-red-300 dark:text-red-300 dark:border-red-300 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                  />
+                </div>
+
+                <div className='col-span-2'>
+                  <label class="block mb-2 text-sm text-red-300 dark:text-red-300">Phone number</label>
+                  <input
+                    type="text"
+                    name="phoneNumber"
+                    value={formData.phoneNumber}
+                    onChange={handleFormChange}
+                    required
+                    placeholder="123-456-7890"
+                    class="block w-full px-5 py-3 mt-2 text-red-300 placeholder-red-300 bg-white border border-red-300 rounded-lg dark:placeholder-red-300 dark:bg-red-300 dark:text-red-300 dark:border-red-300 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                  />
+                </div>
+
+               
+
+                <div>
+                  <label class="block mb-2 text-sm text-red-300 dark:text-red-300">Password</label>
                   <input
                     type="password"
                     name="password"
@@ -230,12 +251,12 @@ const Signup = () => {
                     onChange={handleFormChange}
                     required
                     placeholder="Enter your password"
-                    class="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                    class="block w-full px-5 py-3 mt-2 text-red-300 placeholder-red-300 bg-white border border-red-300 rounded-lg dark:placeholder-red-300 dark:bg-red-300 dark:text-red-300 dark:border-red-300 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
 
                 <div>
-        <label class="block mb-2 text-sm text-pink-600 dark:text-pink-200">Confirm password</label>
+        <label class="block mb-2 text-sm text-red-300 dark:text-red-300">Confirm password</label>
         <input
           type="password"
           name="confirmPassword"
@@ -243,7 +264,7 @@ const Signup = () => {
           onChange={handleConfirmPasswordChange} // Changed to handleConfirmPasswordChange
           placeholder="Enter your password"
           required
-          class="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+          class="block w-full px-5 py-3 mt-2 text-red-300 placeholder-red-300 bg-white border border-red-300 rounded-lg dark:placeholder-red-300 dark:bg-red-300 dark:text-red-300 dark:border-red-300 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
         />
         {formData.confirmPassword && (
           <p className={passwordMatch ? 'text-green-500' : 'text-red-500'}>
@@ -255,25 +276,25 @@ const Signup = () => {
                
 
                 <div class="col-span-2">
-                    <label class="block mb-2 text-sm text-pink-600 dark:text-pink-200">Profile Image</label>
+                    <label class="block mb-2 text-sm text-red-300 dark:text-red-300">Profile Image</label>
                     <input
                       type="file"
                       name="profileImage"
                       onChange={handleImageChange}
                       accept="image/*"
-                      class="block w-full px-5 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                      class="block w-full px-5 py-3 mt-2 text-red-300 placeholder-red-300 bg-white border border-red-300 rounded-lg dark:placeholder-red-300 dark:bg-red-300 dark:text-red-300 dark:border-red-300 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                     />
                   </div>
 
                 <div class="col-span-2">
-                  <label class="block mb-2 text-sm text-pink-600 dark:text-pink-200">Birth Date</label>
+                  <label class="block mb-2 text-sm text-red-300 dark:text-red-300">Birth Date</label>
                   <div class="flex space-x-2">
                     <select
                       name="birthDate"
                       value={formData.birthDate}
                       required
                       onChange={handleFormChange}
-                      class="block flex-1 px-1 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                      class="block flex-1 px-1 py-3 mt-2 text-red-300 placeholder-red-300 bg-white border border-red-300 rounded-lg dark:placeholder-red-300 dark:bg-red-300 dark:text-red-300 dark:border-red-300 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                     >
                       <option value="" disabled selected>
                         Date
@@ -290,7 +311,7 @@ const Signup = () => {
                       value={formData.birthMonth}
                       onChange={handleFormChange}
                       required
-                      class="block flex-1 px-1 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                      class="block flex-1 px-1 py-3 mt-2 text-red-300 placeholder-red-300 bg-white border border-red-300 rounded-lg dark:placeholder-red-300 dark:bg-red-300 dark:text-red-300 dark:border-red-300 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                     >
                       <option value="" disabled selected>
                         Month
@@ -307,7 +328,7 @@ const Signup = () => {
                       value={formData.birthYear}
                       required
                       onChange={handleFormChange}
-                      class="block flex-1 px-1 py-3 mt-2 text-pink-700 placeholder-pink-400 bg-white border border-pink-200 rounded-lg dark:placeholder-pink-600 dark:bg-pink-900 dark:text-pink-300 dark:border-pink-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                      class="block flex-1 px-1 py-3 mt-2 text-red-300 placeholder-red-300 bg-white border border-red-300 rounded-lg dark:placeholder-red-300 dark:bg-red-300 dark:text-red-300 dark:border-red-300 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                     >
                       <option value="" disabled selected>
                         Year
@@ -325,7 +346,7 @@ const Signup = () => {
                 <button
           type='submit'
           className={`w-full p-2 rounded-md ${
-            isLoading ? 'bg-pink-400 cursor-not-allowed' : 'bg-pink-900'
+            isLoading ? 'bg-red-300 cursor-not-allowed' : 'bg-red-300'
           } text-white`}
           disabled={isLoading}
         >
