@@ -174,7 +174,7 @@ const Signup = () => {
               </p>
 
               <form class="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2" onSubmit={handleFormSubmit}>
-                <div>
+              <div className="col-span-2 md:col-span-1">
                   <label class="block mb-2 text-sm text-orange-700 dark:text-orange-700">User Name</label>
                   <input
                     type="text"
@@ -187,7 +187,7 @@ const Signup = () => {
                   />
                 </div>
 
-                <div>
+                <div className="col-span-2 md:col-span-1">
                   <label class="block mb-2 text-sm text-orange-700 dark:text-orange-700">Email address</label>
                   <input
                     type="email"
@@ -201,7 +201,7 @@ const Signup = () => {
                 </div>
                 
 
-                <div>
+                <div className="col-span-2 md:col-span-1">
                   <label class="block mb-2 text-sm text-orange-700 dark:text-orange-700">First Name</label>
                   <input
                     type="text"
@@ -214,7 +214,7 @@ const Signup = () => {
                   />
                 </div>
 
-                <div>
+                <div className="col-span-2 md:col-span-1">
                   <label class="block mb-2 text-sm text-orange-700 dark:text-orange-700">Last name</label>
                   <input
                     type="text"
@@ -242,7 +242,7 @@ const Signup = () => {
 
                
 
-                <div>
+                <div className="col-span-2 md:col-span-1">
                   <label class="block mb-2 text-sm text-orange-700 dark:text-orange-700">Password</label>
                   <input
                     type="password"
@@ -255,7 +255,7 @@ const Signup = () => {
                   />
                 </div>
 
-                <div>
+                <div className="col-span-2 md:col-span-1">
         <label class="block mb-2 text-sm text-orange-700 dark:text-orange-700">Confirm password</label>
         <input
           type="password"
@@ -347,7 +347,7 @@ const Signup = () => {
           type='submit'
           className={`w-full p-2 rounded-md ${
             isLoading ? 'bg-red-300 cursor-not-allowed' : 'bg-red-300'
-          } text-orange-700`}
+          } text-white`}
           disabled={isLoading}
         >
           {isLoading ? 'Loading...' : 'Sign Up'}
