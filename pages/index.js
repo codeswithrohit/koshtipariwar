@@ -56,7 +56,7 @@ const Index = () => {
         <link rel="icon" href="/icon.png" />
       </Head>
       <Carousel imageUrls={imageUrls} />
-      <section className="bg-white mt-10">
+      <section className="bg-white mt-8 ">
         <div className="container mx-auto">
           <div className="text-center">
             <h1 className="text-2xl font-semibold text-orange-700  capitalize lg:text-3xl dark:text-white py-5">

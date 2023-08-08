@@ -38,28 +38,27 @@ const Carousel = ({ imageUrls }) => {
   return (
     <div className='max-w-[1640px] mx-auto p-2 '>
       <div ref={slideRef} className='max-h-[450px] relative '>
-      <img className="px-20"
-  style={{ height: "510px",width:"100%" }}
+      <img
+  className="px-1 md:px-20"
+  style={{
+    width: "100%", // Fill the available width
+    maxWidth: "100%",
+    maxHeight:"500px", // Limit the width for desktop view
+    // Adjust the height for desktop (e.g., 400px)
+    '@media (min-width: 1024px)': {
+      height: "200px", // Custom height for desktop
+    },
+    '@media (max-width: 767px)': {
+      height: "200px", // Custom height for mobile
+    }
+  }}
   src={imageUrls[currentIndex]}
   alt="/"
 />
 
-        <div className='absolute inset-y-0 left-0 flex justify-center items-center'>
-          <button
-            className='bg-red-300 text-white p-2 rounded-full bg-opacity-50 cursor-pointer hover:bg-opacity-100 transition'
-            onClick={handleOnPrevClick}
-          >
-            <AiOutlineArrowLeft size={30} />
-          </button>
-        </div>
-        <div className='absolute inset-y-0 right-0 flex justify-center items-center'>
-          <button
-            className='bg-red-300 text-white p-2 rounded-full bg-opacity-50 cursor-pointer hover:bg-opacity-100 transition'
-            onClick={handleOnNextClick}
-          >
-            <AiOutlineArrowRight size={30} />
-          </button>
-        </div>
+
+
+       
       </div>
     </div>
   );
