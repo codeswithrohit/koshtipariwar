@@ -7,16 +7,16 @@ const Footer = () => {
     <footer className="bg-white text-red-200">
       <div className="mx-auto max-w-5xl px-4 py-16 sm:px-2 lg:px-8 flex justify-center items-center">
         <div className="text-justify text-bold text-orange-700">
-          <h1 className="text-xl ">
+          <h1 className="text-sm md:text-xl  ">
             विणकर म्हणजे कोष्टी. कोषा पासून वस्त्रे निर्माण करणारा तो कोष्टी. झाडाच्या साली पासून
           </h1>
-          <h1 className="text-xl ">
+          <h1 className="text-sm md:text-xl ">
             वस्त्रे निर्माण करणारा तो साळी. कोष्टी हा प्रमुख घटक धरलागेला आणि भिन्न कौशल्य वापरुन
           </h1>
-          <h1 className="text-xl ">
+          <h1 className="text-sm md:text-xl ">
             अनेक प्रकारचे वस्त्र निर्माण करण्याच्या गुणांवरुन भिन्न विणकाम करणारे विणकरवर्ग
           </h1>
-          <h1 className="text-xl">
+          <h1 className="text-sm md:text-xl">
             निर्माण झालेत. अशाप्रकारे विणकर, कोष्टी, साळी, इत्यादी शब्दांची निर्मिती दिसून येते.
           </h1>
         </div>

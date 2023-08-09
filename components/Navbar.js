@@ -95,8 +95,8 @@ const Navbar = () => {
               className="inline-flex items-center mr-8"
             >
               <img
-                className="w-18 h-12 mx-auto rounded-lg"
-                src="http://koshtipariwar.com/wp-content/uploads/koshti_logo3.jpg"
+                className="w-36 h-16 mx-auto "
+                src="koshtipariwar.jpg"
                 alt="koshtipariwar"
               />
             </Link>
@@ -260,10 +260,10 @@ const Navbar = () => {
                         onClick={handleLinkClick}
                       >
                         <img
-                          className="w-18 h-12 mx-auto rounded-lg"
-                          src="http://koshtipariwar.com/wp-content/uploads/koshti_logo3.jpg"
-                          alt="koshtipariwar"
-                        />
+                className="w-36 h-16 mx-auto "
+                src="koshtipariwar.jpg"
+                alt="koshtipariwar"
+              />
                       </Link>
                     </div>
                     <div>

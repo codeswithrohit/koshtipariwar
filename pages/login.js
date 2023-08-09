@@ -55,7 +55,11 @@ const Login = () => {
         <div class="container px-6 py-24 mx-auto lg:py-32">
           <div class="lg:flex">
             <div class="lg:w-1/2">
-              <img class=" w-18 h-12 mx-auto rounded-lg" src="http://koshtipariwar.com/wp-content/uploads/koshti_logo3.jpg" alt="koshtipariwar" />
+            <img
+                className="w-36 h-16 mx-auto "
+                src="koshtipariwar.jpg"
+                alt="koshtipariwar"
+              />
               <h1 class="mt-4 text-orange-700 dark:text-orange-700 md:text-lg">Welcome </h1>
               <h1 class="mt-4 text-2xl text-orange-700 font-medium text-orange-700 capitalize lg:text-3xl dark:text-white">
                 Login to your account

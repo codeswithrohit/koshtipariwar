@@ -37,8 +37,11 @@ const AdminNav = () => {
             title="koshtipariwar"
             className="inline-flex items-center mr-8"
           >
-           <img class=" w-18 h-12 mx-auto rounded-lg" 
-           src="http://koshtipariwar.com/wp-content/uploads/koshti_logo3.jpg" alt="koshtipariwar" />
+           <img
+                className="w-36 h-16 mx-auto "
+                src="koshtipariwar.jpg"
+                alt="koshtipariwar"
+              />
           </Link>
           <ul className="flex items-center hidden space-x-8 lg:flex">
             <li>
@@ -135,8 +138,11 @@ const AdminNav = () => {
                       className="inline-flex items-center"
                       onClick={handleLinkClick}
                     >
-                                 <img class=" w-18 h-12 mx-auto rounded-lg" 
-           src="http://koshtipariwar.com/wp-content/uploads/koshti_logo3.jpg" alt="koshtipariwar" />
+                                 <img
+                className="w-36 h-16 mx-auto "
+                src="koshtipariwar.jpg"
+                alt="koshtipariwar"
+              />
                     </Link>
                   </div>
                   <div>
