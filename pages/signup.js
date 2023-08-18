@@ -19,7 +19,6 @@ const Signup = () => {
     birthDate: '',
     birthMonth: '',
     birthYear: '',
-    profileImage: null, // New state for profile image
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -36,24 +35,20 @@ const Signup = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  // Handle file selection for profile image
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    setFormData({ ...formData, profileImage: file });
-  };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
   
     // Check if any required field is empty
     for (const field in formData) {
-      if (field !== 'profileImage' && !formData[field]) {
+      if (!formData[field]) {
         toast.error('All fields are required.', {
           position: toast.POSITION.TOP_RIGHT,
         });
         return;
       }
     }
+    
   
     // Check if passwords match
     if (formData.password !== formData.confirmPassword) {
@@ -80,13 +75,7 @@ const Signup = () => {
       await createUserWithEmailAndPassword(firebase.auth(), email, password);
   
       // Upload profile image to Firebase Storage if selected
-      if (formData.profileImage) {
-        const storageRef = firebase.storage().ref();
-        const imageRef = storageRef.child(`${email}/profile-image`);
-        await imageRef.put(formData.profileImage);
-        const downloadURL = await imageRef.getDownloadURL();
-        formData.profileImage = downloadURL;
-      }
+      
   
       // Store additional user data in Firestore, including profile image URL if selected
       const db = firebase.firestore();
@@ -99,7 +88,6 @@ const Signup = () => {
         birthDate,
         birthMonth,
         birthYear,
-        profileImageURL: formData.profileImage, // Store profile image URL
       });
   
       setIsLoading(false);
@@ -121,7 +109,6 @@ const Signup = () => {
         birthDate: '',
         birthMonth: '',
         birthYear: '',
-        profileImage: null, // Reset profile image selection
       });
   
       router.push('/login');
@@ -275,16 +262,7 @@ const Signup = () => {
 
                
 
-                <div class="col-span-2">
-                    <label class="block mb-2 text-sm text-orange-700 dark:text-orange-700">Profile Image</label>
-                    <input
-                      type="file"
-                      name="profileImage"
-                      onChange={handleImageChange}
-                      accept="image/*"
-                      class="block w-full px-5 py-3 mt-2 text-orange-700 placeholder-orange-700 bg-white border border-red-300 rounded-lg dark:placeholder-orange-700 dark:bg-red-300 dark:text-orange-700 dark:border-red-300 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
-                    />
-                  </div>
+               
 
                 <div class="col-span-2">
                   <label class="block mb-2 text-sm text-orange-700 dark:text-orange-700">Birth Date</label>

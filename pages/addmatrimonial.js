@@ -29,6 +29,7 @@ const FormComponent = () => {
   });
 
 
+  const [user, setUser] = useState(null);
   useEffect(() => {
     // Function to check if the user is logged in
     const checkUserLoggedIn = () => {
@@ -36,6 +37,8 @@ const FormComponent = () => {
         if (!user) {
           // If the user is not logged in, redirect to the login page
           router.push('/login');
+        } else {
+          setUser(user.uid); // Set the user object to state
         }
       });
 
@@ -46,6 +49,8 @@ const FormComponent = () => {
     // Call the checkUserLoggedIn function when the component mounts
     checkUserLoggedIn();
   }, [router]);
+
+  console.log(user)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -126,6 +131,7 @@ const FormComponent = () => {
         sameAsParentAddress: false,
         email: '',
         gender: '',
+        uid:user,
       });
     } catch (error) {
       console.error('Error submitting data: ', error);

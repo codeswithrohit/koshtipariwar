@@ -97,6 +97,11 @@ const Profile = () => {
     router.push('/addmatrimonial');
   };
 
+  const handleEditMatrimonial = () => {
+    // Here, you can navigate to the "addmatrimonial" page when the button is clicked
+    router.push('/editmatrimonial');
+  };
+
   if (isLoading) {
     return <Spinner />; // Show spinner while loading data
   }
@@ -106,18 +111,15 @@ const Profile = () => {
   }
 
   return (
-    <body className="m-auto min-h-screen bg-white dark:bg-white font-sans antialiased text-gray-900 leading-normal tracking-wider bg-cover" style={{ backgroundImage: "url('https://source.unsplash.com/1L71sPT5XKc')" }}>
-      <div className="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
+    <body className="m-auto min-h-screen bg-white dark:bg-white font-sans antialiased text-gray-900 leading-normal tracking-wider bg-cover" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1483136781463-b71cca943b51?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=899&q=80')" }}>
+      <div className="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto  lg:my-0">
 
         {/*Main Col*/}
         <div id="profile" className="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl bg-white opacity-75 mx-6 lg:mx-0">
 
           <div className="p-4 md:p-12 text-center lg:text-left">
             {/* Image for mobile view */}
-            <div
-  className="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center"
-  style={{ backgroundImage: `url('${userData.profileImageURL}')` }}
-></div>
+           
 
 
             <h1 className="text-3xl font-bold pt-8 lg:pt-0">{userData.firstName} {userData.lastName}</h1>
@@ -131,8 +133,12 @@ const Profile = () => {
             <p className="pt-4 text-base font-bold flex items-center justify-center lg:justify-start">
               <FcCalendar className="h-12 w-12 fill-current text-red-300 pr-4" /> {userData.birthDate}/{userData.birthMonth}/{userData.birthYear}
             </p>
-            <button className="mt-4 mr-5 bg-red-300 hover:bg-red-300 text-white font-bold py-2 px-4 rounded" onClick={handleAddMatrimonial}>
+            <button className="mt-4 mr-2 bg-red-300 hover:bg-red-300 text-white font-bold py-2 px-4 rounded" onClick={handleAddMatrimonial}>
         Add Matrimonial
+      </button>
+
+      <button className="mt-4 items-center mr-2 bg-red-300 hover:bg-red-300 text-white font-bold py-2 px-4 rounded" onClick={handleEditMatrimonial}>
+        Our Matrimonial
       </button>
 
             <button className="mt-4 bg-red-300 hover:bg-red-300 text-white font-bold py-2 px-4 rounded" onClick={() => setShowChangePassword(true)}>
@@ -142,10 +148,7 @@ const Profile = () => {
         </div>
 
         {/* Img Col */}
-        <div className="w-full lg:w-2/5">
-          {/* Big profile image for side bar (desktop) */}
-          <img src={userData.profileImageURL} className="rounded-none lg:rounded-lg shadow-2xl hidden lg:block" />
-        </div>
+       
 
         {/* Pin to top right corner */}
         <div className="absolute top-0 right-0 h-12 w-18 p-4">

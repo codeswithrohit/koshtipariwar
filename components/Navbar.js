@@ -95,7 +95,7 @@ const Navbar = () => {
               className="inline-flex items-center mr-8"
             >
               <img
-                className="w-36 h-16 mx-auto "
+                className="w-48 h-16 mx-auto "
                 src="koshtipariwar.jpg"
                 alt="koshtipariwar"
               />

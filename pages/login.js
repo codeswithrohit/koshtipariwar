@@ -56,7 +56,7 @@ const Login = () => {
           <div class="lg:flex">
             <div class="lg:w-1/2">
             <img
-                className="w-36 h-16 mx-auto "
+                className="w-48 h-16 mx-auto "
                 src="koshtipariwar.jpg"
                 alt="koshtipariwar"
               />

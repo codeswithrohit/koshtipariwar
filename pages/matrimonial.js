@@ -9,35 +9,57 @@ const Matrimonial = () => {
   const router = useRouter(); // Access the router
   const [usersData, setUsersData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [gender, setGender] = useState('All'); // Add state for gender
+  const [gender, setGender] = useState('All');
+const [age, setAge] = useState('All');
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 9;
 
   const handleShowAll = () => {
     setGender('All');
+    setAge('All');
     setCurrentPage(1);
   };
-
+  
   const handleShowBride = () => {
     setGender('Female');
+    setAge('All');
     setCurrentPage(1);
   };
-
+  
   const handleShowGroom = () => {
     setGender('Male');
+    setAge('All');
     setCurrentPage(1);
   };
+  
+  const handleShowAllAge = () => {
+    setAge('All');
+    setCurrentPage(1);
+  };
+  
+  const handleShowAge = (ageRange) => {
+    setAge(ageRange);
+    setCurrentPage(1);
+  };
+  
 
   // New state to manage pop-up visibility and selected user's data
   const [showPopup, setShowPopup] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+
+
+
+ 
+
+
 
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         const db = firebase.firestore();
         const usersRef = db.collection('matrimonials');
-
+  
         usersRef
           .get()
           .then((querySnapshot) => {
@@ -45,10 +67,27 @@ const Matrimonial = () => {
             querySnapshot.forEach((doc) => {
               userData.push({ ...doc.data(), id: doc.id });
             });
-
-            const filteredUserData =
-              gender === 'All' ? userData : userData.filter((user) => user.gender === gender);
-
+  
+            const filteredUserData = userData.filter((user) => {
+              const userAge = calculateAgeWithMonths(user.dob);
+  
+              if (gender === 'All' || (gender === 'Female' && user.gender === 'Female') || (gender === 'Male' && user.gender === 'Male')) {
+                if (age === 'All') {
+                  return true;
+                } else if (age === '0-25' && userAge <= '25 years 0 months') {
+                  return true;
+                } else if (age === '25-30' && userAge > '25 years 0 months' && userAge <= '30 years 0 months') {
+                  return true;
+                } else if (age === '30-35' && userAge > '30 years 0 months' && userAge <= '35 years 0 months') {
+                  return true;
+                } else if (age === '35 Years & Above' && userAge > '35 years 0 months') {
+                  return true;
+                }
+              }
+  
+              return false;
+            });
+  
             setUsersData(filteredUserData);
             setIsLoading(false);
           })
@@ -60,9 +99,13 @@ const Matrimonial = () => {
         router.push('/login');
       }
     });
-
+  
     return () => unsubscribe();
-  }, [router, gender]);
+  }, [router, gender, age]);
+  
+
+ 
+  
 
  
 
@@ -96,13 +139,29 @@ const Matrimonial = () => {
 
   // Calculate total number of pages
   const totalPages = Math.ceil(usersData.length / itemsPerPage);
+  function calculateAgeWithMonths(dob) {
+    const birthDate = new Date(dob);
+    const currentDate = new Date();
+  
+    let years = currentDate.getFullYear() - birthDate.getFullYear();
+    let months = currentDate.getMonth() - birthDate.getMonth();
+  
+    if (months < 0 || (months === 0 && currentDate.getDate() < birthDate.getDate())) {
+      years--;
+      months += 12;
+    }
+  
+    return `${years} years ${months} months`;
+  }
+  
+  
 
   return (
     <div className="m-auto min-h-screen bg-white dark:bg-gray-900">
       <section className="bg-white dark:bg-gray-900">
         <div className="container px-6 py-10 mx-auto">
           <h1 className="text-3xl font-semibold text-center text-gray-800 capitalize lg:text-4xl dark:text-white">
-            Our <span className="text-red-300">Matrimonial</span>
+             <span className="text-red-300">Our Matrimonial</span>
           </h1>
 
           <div className="flex items-center justify-center mt-5 mb-8">
@@ -138,9 +197,65 @@ const Matrimonial = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 xl:grid-cols-3">
+          <div className="flex flex-wrap items-center justify-center mt-5 mb-8">
+  <div className="flex flex-row md:flex-row p-1 border border-red-300 dark:border-red-300 rounded-xl">
+  <button
+              onClick={handleShowAllAge}
+              className={`px-3 py-1 mx-2 my-1 text-xs md:text-sm font-medium capitalize transition-colors duration-300 ${
+                age === 'All' ? 'text-white bg-red-300' : 'text-red-300 dark:text-red-300 hover:text-white hover:bg-red-300'
+              } rounded-xl md:mx-1 md:my-0 md:px-4 md:py-2`}
+            >
+              All
+            </button>
+            <button
+              onClick={() => handleShowAge('0-25')}
+              className={`px-3 py-1 mx-2 my-1 text-xs md:text-sm font-medium capitalize transition-colors duration-300 ${
+                age === '0-25'
+                  ? 'text-white bg-red-300'
+                  : 'text-red-300 dark:text-red-300 hover:text-white hover:bg-red-300'
+              } rounded-xl md:mx-1 md:my-0 md:px-4 md:py-2`}
+            >
+              0-25 Years
+            </button>
+            <button
+              onClick={() => handleShowAge('25-30')}
+              className={`px-3 py-1 mx-2 my-1 text-xs md:text-sm font-medium capitalize transition-colors duration-300 ${
+                age === '25-30'
+                  ? 'text-white bg-red-300'
+                  : 'text-red-300 dark:text-red-300 hover:text-white hover:bg-red-300'
+              } rounded-xl md:mx-1 md:my-0 md:px-4 md:py-2`}
+            >
+              25-30 Years
+            </button>
+            <button
+              onClick={() => handleShowAge('30-35')}
+              className={`px-3 py-1 mx-2 my-1 text-xs md:text-sm font-medium capitalize transition-colors duration-300 ${
+                age === '30-35'
+                  ? 'text-white bg-red-300'
+                  : 'text-red-300 dark:text-red-300 hover:text-white hover:bg-red-300'
+              } rounded-xl md:mx-1 md:my-0 md:px-4 md:py-2`}
+            >
+              30-35 Years
+            </button>
+            <button
+              onClick={() => handleShowAge('35 Years & Above')}
+              className={`px-3 py-1 mx-2 my-1 text-xs md:text-sm font-medium capitalize transition-colors duration-300 ${
+                age === '35 Years & Above'
+                  ? 'text-white bg-red-300'
+                  : 'text-red-300 dark:text-red-300 hover:text-white hover:bg-red-300'
+              } rounded-xl md:mx-1 md:my-0 md:px-4 md:py-2`}
+            >
+              35 Years & Above
+            </button>
+  </div>
+</div>
+
+
+<div className="grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 xl:grid-cols-3">
   {isLoading ? (
-    <Spinner />
+    <Spinner /> // Show loading spinner while data is loading
+  ) : usersData.length === 0 ? (
+    <p className="text-center text-gray-600 ml-50">No Matrimonial found.</p> // Centered empty state message
   ) : (
     usersData.map((user, idx) => (
       <div
@@ -199,6 +314,16 @@ const Matrimonial = () => {
             <p className="text-gray-500 mb-4 group-hover:text-gray-300">
               {user.dob}
             </p>
+          </div>
+          <div className="w-full md:w-1/2">
+            <h2 className="text-lg font-semibold text-gray-700 capitalize group-hover:text-white">
+              Age
+            </h2>
+            {user.dob && (
+    <p className="text-gray-500 mb-4 group-hover:text-gray-300">
+      {calculateAgeWithMonths(user.dob)}
+    </p>
+  )}
           </div>
         
         </div>
@@ -326,9 +451,19 @@ const Matrimonial = () => {
               <p className="text-gray-500 mb-4">{selectedUser.mobileNumber}</p>
             </div>
           </div>
+          <div className="flex flex-row space-x-4">
           <div className="w-full md:w-1/2">
               <h2 className="text-lg font-semibold text-gray-700 capitalize">Email</h2>
               <p className="text-gray-500 mb-4">{selectedUser.email}</p>
+            </div>
+            <div className="w-full md:w-1/2">
+              <h2 className="text-lg font-semibold text-gray-700 capitalize">Age</h2>
+              {selectedUser.dob && (
+    <p className="text-gray-500 mb-4 group-hover:text-gray-300">
+      {calculateAgeWithMonths(selectedUser.dob)}
+    </p>
+  )}
+            </div>
             </div>
           <div className="flex flex-row space-x-4">
             
