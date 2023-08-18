@@ -142,11 +142,11 @@ const FormComponent = () => {
   };
   return (
     <div className="bg-white dark:bg-white min-h-screen">
-      <div className="container mx-auto p-4">
-        <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-          <h2 className="text-2xl font-bold mb-4">Matrimonial Information</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
+  <div className="container mx-auto p-4">
+    <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+      <h2 className="text-2xl font-bold mb-4">Matrimonial Information</h2>
+      <div className="gap-4 md:grid md:grid-cols-2">
+        <div className="col-span-1">
               <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                 Name<span className="text-red-500">*</span>
               </label>
@@ -160,7 +160,7 @@ const FormComponent = () => {
                 className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
-            <div>
+            <div className="col-span-1">
               <label htmlFor="parentName" className="block text-sm font-medium text-gray-700">
                 Parent Name<span className="text-red-500">*</span>
               </label>
@@ -174,7 +174,7 @@ const FormComponent = () => {
                 className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
-            <div>
+            <div className="col-span-1">
               <label htmlFor="mobileNumber" className="block text-sm font-medium text-gray-700">
                 Mobile Number<span className="text-red-500">*</span>
               </label>
@@ -188,7 +188,7 @@ const FormComponent = () => {
                 className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
-            <div>
+            <div className="col-span-1">
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                  Email ID<span className="text-red-500">*</span>
               </label>
@@ -202,7 +202,7 @@ const FormComponent = () => {
                 className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
-            <div>
+            <div className="col-span-1">
               <label htmlFor="parentAddress" className="block text-sm font-medium text-gray-700">
                 Parent Address<span className="text-red-500">*</span>
               </label>
@@ -216,7 +216,7 @@ const FormComponent = () => {
                 className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
-            <div>
+            <div className="col-span-1">
               <label htmlFor="yourAddress" className="block text-sm font-medium text-gray-700">
                  Address<span className="text-red-500">*</span>
               </label>
@@ -243,7 +243,7 @@ const FormComponent = () => {
             </div>
             </div>
             
-            <div>
+            <div className="col-span-1">
               <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
                 Select Gender<span className="text-red-500">*</span>
               </label>
@@ -259,7 +259,7 @@ const FormComponent = () => {
                 <option value="Female">Female</option>
               </select>
             </div>
-            <div>
+            <div className="col-span-1">
               <label htmlFor="dob" className="block text-sm font-medium text-gray-700">
                 Date of Birth<span className="text-red-500">*</span>
               </label>
@@ -272,7 +272,7 @@ const FormComponent = () => {
                 className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
-            <div>
+            <div className="col-span-1">
               <label htmlFor="birthtime" className="block text-sm font-medium text-gray-700">
                 Birth Time<span className="text-red-500">*</span>
               </label>
@@ -286,7 +286,7 @@ const FormComponent = () => {
                 className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
-            <div>
+            <div className="col-span-1">
               <label htmlFor="birthplace" className="block text-sm font-medium text-gray-700">
                 Birthplace<span className="text-red-500">*</span>
               </label>
@@ -300,7 +300,7 @@ const FormComponent = () => {
                 className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
-            <div>
+            <div className="col-span-1">
               <label htmlFor="height" className="block text-sm font-medium text-gray-700">
                 Height<span className="text-red-500">*</span>
               </label>
@@ -314,7 +314,7 @@ const FormComponent = () => {
                 className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
-            <div>
+            <div className="col-span-1">
               <label htmlFor="education" className="block text-sm font-medium text-gray-700">
                 Education<span className="text-red-500">*</span>
               </label>
@@ -328,7 +328,7 @@ const FormComponent = () => {
                 className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
-            <div>
+            <div className="col-span-1">
               <label htmlFor="occupation" className="block text-sm font-medium text-gray-700">
                 Occupation<span className="text-red-500">*</span>
               </label>
@@ -342,7 +342,7 @@ const FormComponent = () => {
                 className="mt-1 px-4 py-2 block w-full rounded-md border border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
-            <div>
+            <div className="col-span-1">
               <label htmlFor="monthlyIncome" className="block text-sm font-medium text-gray-700">
                 Monthly Income
               </label>

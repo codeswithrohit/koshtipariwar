@@ -74,7 +74,8 @@ const AddJob = () => {
 
   return (
     <>
-      <AdminNav />
+      <AdminNav setIsAdmin={setIsAdmin} />
+
       <div className="m-auto min-h-screen bg-white dark:bg-white w-full flex items-center justify-center ">
         <div>
           <h1 className="mb-1 font-bold text-3xl flex gap-1 items-baseline font-mono">

@@ -169,7 +169,7 @@ const Signup = () => {
                     value={formData.username}
                     onChange={handleFormChange}
                     required
-                    placeholder="John@123"
+                    placeholder="Example@123"
                     class="block w-full px-5 py-3 mt-2 text-orange-700 placeholder-orange-700 bg-white border border-red-300 rounded-lg dark:placeholder-orange-700 dark:bg-red-300 dark:text-orange-700 dark:border-red-300 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
