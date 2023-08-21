@@ -64,7 +64,7 @@ const Index = () => {
             </h1>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 mt-2 lg:grid-cols-3 px-5">
+          <div className="grid grid-cols-1 gap-8 mt-2 lg:grid-cols-3 px-10">
             {photoData.map((data) => (
                 <Link key={data.id} href={`/gallerydetails?id=${data.id}`}>
                 <div

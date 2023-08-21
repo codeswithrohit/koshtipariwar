@@ -8,6 +8,7 @@ import { firebase } from '../../Firebase/config';
 import 'firebase/storage';
 import 'firebase/firestore';
 import AdminNav from '../../components/AdminNav';
+import AdminCarousel from '../../components/AdminCarousel';
 
 const AddSlider = () => {
   const router = useRouter(); // Use useRouter hook
@@ -53,7 +54,6 @@ const AddSlider = () => {
                 // You can add more data related to the slider here
               })
               .then(() => {
-                console.log('Slider data saved successfully!');
                 toast.success('Your slider image has been uploaded successfully');
                 setUploading(false); // Set uploading state to false
               })
@@ -69,6 +69,71 @@ const AddSlider = () => {
         });
     }
   };
+  const [isLoading, setIsLoading] = useState(true);
+  const [imageUrls, setImageUrls] = useState([]);
+  const [toastId, setToastId] = useState(null);
+
+  useEffect(() => {
+    const isAdminInLocalStorage = localStorage.getItem('isAdmin') === 'true';
+    setIsAdmin(isAdminInLocalStorage);
+    if (!isAdminInLocalStorage) {
+      router.push('/admin/login');
+    } else {
+      fetchImageData();
+    }
+  }, [router]);
+
+  const fetchImageData = async () => {
+    try {
+      const db = firebase.firestore();
+      const snapshot = await db.collection('sliderData').get();
+      const imageUrls = snapshot.docs.map((doc) => doc.data().imageUrl);
+      setImageUrls(imageUrls);
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error fetching image data:', error);
+      setIsLoading(false);
+    }
+  };
+
+  const deleteImageFromFirebase = async (imageUrlToDelete) => {
+    try {
+      const db = firebase.firestore();
+      const snapshot = await db
+        .collection('sliderData')
+        .where('imageUrl', '==', imageUrlToDelete)
+        .get();
+      snapshot.forEach((doc) => doc.ref.delete());
+
+      setImageUrls((prevImageUrls) =>
+        prevImageUrls.filter((url) => url !== imageUrlToDelete)
+      );
+
+      // Show success toast message
+      const successToastId = toast.success('Image deleted successfully!', {
+        autoClose: 3000, // Set a duration for the toast
+      });
+
+      // Store the toast id in the state
+      setToastId(successToastId);
+
+      return true;
+    } catch (error) {
+      console.error('Error deleting image from Firebase:', error);
+      // Show error toast message
+      toast.error('Failed to delete the image.');
+      return false;
+    }
+  };
+
+  useEffect(() => {
+    // Clear the toast when the component unmounts or a new image is deleted
+    return () => {
+      if (toastId) {
+        toast.dismiss(toastId);
+      }
+    };
+  }, [toastId]);
   if (!isAdmin) {
     // If the user is not an admin, show a loading message or redirect them to the login page
     return <>Please Login then show Admin Panel ........</>;
@@ -103,7 +168,15 @@ const AddSlider = () => {
             </button>
           </div>
         </fieldset>
+      
       </div>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : imageUrls.length === 0 ? (
+        <div>No images available.</div>
+      ) : (
+        <AdminCarousel imageUrls={imageUrls} onDeleteImage={deleteImageFromFirebase} />
+      )}
       {/* Toast container for displaying notifications */}
       <ToastContainer />
     </>

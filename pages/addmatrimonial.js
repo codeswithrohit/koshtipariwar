@@ -26,6 +26,7 @@ const FormComponent = () => {
     sameAsParentAddress: false,
     email: '',
     gender: '',
+    uid:'',
   });
 
 
@@ -104,7 +105,7 @@ const FormComponent = () => {
       }
 
       // Add the image URLs to the form data
-      const formDataWithPhotoURLs = { ...formData, photos: photoURLs };
+      const formDataWithPhotoURLs = { ...formData, photos: photoURLs,uid: user };
 
       // Add the complete form data to Firestore
       await collectionRef.add(formDataWithPhotoURLs);

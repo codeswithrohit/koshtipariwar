@@ -50,73 +50,50 @@ const Login = () => {
   };
 
   return (
-    <div className='m-auto min-h-screen bg-white dark:bg-white'>
-      <section class="bg-white dark:bg-orange-700 ">
-        <div class="container px-6 py-24 mx-auto lg:py-32">
-          <div class="lg:flex">
-            <div class="lg:w-1/2">
-            <img
-                className="w-48 h-16 mx-auto "
-                src="koshtipariwar.jpg"
-                alt="koshtipariwar"
-              />
-              <h1 class="mt-4 text-orange-700 dark:text-orange-700 md:text-lg">Welcome </h1>
-              <h1 class="mt-4 text-2xl text-orange-700 font-medium text-orange-700 capitalize lg:text-3xl dark:text-white">
-                Login to your account
-              </h1>
-            </div>
-            <div class="mt-8 lg:w-1/2 lg:mt-0">
-              <form class="w-full lg:max-w-xl" onSubmit={handleFormSubmit}>
-                <div class="relative flex items-center">
-                  <span class="absolute">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-3 text-orange-700 dark:text-orange-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                      {/* ... (your SVG path) ... */}
-                    </svg>
-                  </span>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleFormChange}
-                    placeholder="Email address"
-                    class="block w-full py-3 text-orange-700 bg-white border rounded-lg px-11 dark:bg-orange-700 dark:text-orange-700 dark:border-orange-700 focus:border-red-300 dark:focus:border-red-300 focus:ring-red-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                  />
-                </div>
-                <div class="relative flex items-center mt-4">
-                  <span class="absolute">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-3 text-orange-700 dark:text-orange-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                      {/* ... (your SVG path) ... */}
-                    </svg>
-                  </span>
-                  <input
-                    type="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleFormChange}
-                    placeholder="Password"
-                    class="block w-full px-10 py-3 text-orange-700 bg-white border rounded-lg dark:bg-orange-700 dark:text-orange-700 dark:border-orange-700 focus:border-red-300 dark:focus:border-red-300 focus:ring-red-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                  />
-                </div>
-                <div class="mt-8 md:flex md:items-center">
-                  <button
-                    type="submit"
-                    class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-red-300 rounded-lg md:w-1/2 hover:bg-red-500 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-50"
-                    disabled={loading} // Disable the button while loading is true
-                  >
-                    {loading ? 'Signing in...' : 'Sign in'}
-                  </button>
-                  <Link href="/forgotpassword" class="inline-block mt-4 text-center text-orange-700 md:mt-0 md:mx-6 hover:underline dark:text-orange-700">
-                    Forgot your password?
-                  </Link>
-                </div>
-              </form>
-            </div>
+    <div className='bg-white dark:bg-white min-h-screen flex justify-center items-center'>
+    <div className="w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-md dark:bg-white">
+      <div className="px-6 py-4">
+       
+  
+        <h3 className="mt-3 text-xl font-medium text-center text-red-300 dark:text-red-300">Welcome</h3>
+  
+        
+  
+        <form onSubmit={handleFormSubmit}>
+          <div className="w-full mt-4">
+            <input className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-lg dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300"
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleFormChange}
+              placeholder="Email address"
+              aria-label="Email Address" />
           </div>
-         
-        </div>
-      </section>
+  
+          <div className="w-full mt-4">
+            <input className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-lg dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300"
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleFormChange}
+              placeholder="Password"
+              aria-label="Password" />
+          </div>
+  
+          <div className="flex items-center justify-between mt-4">
+            <Link href="/forgotpassword" className="text-sm text-gray-600 dark:text-gray-200 hover:text-gray-500">Forget Password?</Link>
+  
+            <button disabled={loading} className="px-6 py-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-red-300 rounded-lg hover:bg-red-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+              {loading ? 'Signing in...' : 'Sign in'}
+            </button>
+          </div>
+        </form>
+      </div>
+  
       <ToastContainer />
     </div>
+  </div>
+  
   );
 };
 

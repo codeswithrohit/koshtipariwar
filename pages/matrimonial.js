@@ -74,7 +74,7 @@ const [age, setAge] = useState('All');
               if (gender === 'All' || (gender === 'Female' && user.gender === 'Female') || (gender === 'Male' && user.gender === 'Male')) {
                 if (age === 'All') {
                   return true;
-                } else if (age === '0-25' && userAge <= '25 years 0 months') {
+                } else if (age === '18-25' && userAge > '18 years 0 months' && userAge <= '25 years 0 months') {
                   return true;
                 } else if (age === '25-30' && userAge > '25 years 0 months' && userAge <= '30 years 0 months') {
                   return true;
@@ -208,14 +208,14 @@ const [age, setAge] = useState('All');
               All
             </button>
             <button
-              onClick={() => handleShowAge('0-25')}
+              onClick={() => handleShowAge('18-25')}
               className={`px-3 py-1 mx-2 my-1 text-xs md:text-sm font-medium capitalize transition-colors duration-300 ${
-                age === '0-25'
+                age === '18-25'
                   ? 'text-white bg-red-300'
                   : 'text-red-300 dark:text-red-300 hover:text-white hover:bg-red-300'
               } rounded-xl md:mx-1 md:my-0 md:px-4 md:py-2`}
             >
-              0-25 Years
+              18-25 Years
             </button>
             <button
               onClick={() => handleShowAge('25-30')}

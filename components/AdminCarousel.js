@@ -1,8 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState, useRef } from 'react';
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 const AdminCarousel = ({ imageUrls, onDeleteImage }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const slideRef = useRef();
@@ -33,10 +31,9 @@ const AdminCarousel = ({ imageUrls, onDeleteImage }) => {
         // For example, if you are using Firebase, you can delete the image from storage and remove the corresponding document from the Firestore collection.
         // For demonstration purposes, let's just show a success message using react-toastify.
         await onDeleteImage(imageUrlToDelete);
-        toast.success('Image deleted successfully!');
+       
       } catch (error) {
         console.error('Error deleting image:', error);
-        toast.error('Failed to delete the image.');
       }
     }
   };
@@ -53,8 +50,8 @@ const AdminCarousel = ({ imageUrls, onDeleteImage }) => {
           src={imageUrls[currentIndex]}
           alt=""
           style={{
-            width: '100%',
-            height: '100%',
+            width: '800%',
+            height: '800%',
             objectFit: 'cover',
             maxWidth: '1500px',
             maxHeight: '600px',
